@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import { React } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,31 +10,56 @@ import {
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.topText}>
-      <Text>NO WAY IT WORKS</Text>
-      <StatusBar style="auto" />
+    <SafeAreaView>
+      <View>
+        <View style={styles.topTextContainer}>
+          <Text style={styles.topText}>NO WAY IT WORKS</Text>
+        </View>
 
-      <View style={styles.activityContainer}>
-        //add activities here through code
+        <View style={styles.activityContainer}>
+          {/*add activities here through code*/}
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <Pressable
+            onPress={() => {
+              console.log("button pressed");
+            }}
+            title="Add Activity"
+            style={styles.addButton}
+          />
+        </View>
       </View>
-
-      <button />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  topTextContainer: {
+    backgroundColor: "lightgray",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 20 : 0,
+    paddingBottom: 20,
+  },
   topText: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    color: "white",
+    fontSize: 30,
+    textAlign: "center",
   },
   activityContainer: {
-    height: "80%",
+    height: "90%",
     width: "auto",
     backgroundColor: "black",
     justifyContent: "center",
-    alignContent: "center",
+    alignContent: "flex-end",
+  },
+  buttonContainer: {
+    flex: 1,
+    position: "absolute",
+    bottom: 40,
+    right: 10,
+    height: 50,
+    width: "100%",
+    alignItems: "flex-end",
   },
   addButton: {},
 });
