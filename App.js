@@ -1,23 +1,37 @@
-import { React } from "react";
+import { React, useCallback, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
   SafeAreaView,
   StatusBar,
-  Button,
+  Pressable,
 } from "react-native";
+var dateFormatter = require("./getDate.js");
 
 export default function App() {
+  function displayCurrentTimeDate() {
+    const [currentDate, setCurrentDate] = useState("");
+    const getDate = useCallback(() => {
+      var formattedDate = dateFormatter.main();
+
+      setCurrentDate(formattedDate);
+    }, []);
+    useEffect(() => {
+      const intervalID = setInterval(getDate, 1000);
+      return () => clearInterval(intervalID);
+    }, [getDate]);
+
+    return <Text style={styles.topText}>{currentDate}</Text>;
+  }
+
   return (
     <SafeAreaView>
       <View>
-        <View style={styles.topTextContainer}>
-          <Text style={styles.topText}>NO WAY IT WORKS</Text>
-        </View>
+        <View style={styles.topTextContainer}>{displayCurrentTimeDate()}</View>
 
         <View style={styles.activityContainer}>
-          {/*add activities here through code*/}
+          {/*ITS CALLED AN ACCORDION :OOOOOOOOOOOOOOOOOOOO*/}
         </View>
 
         <View style={styles.buttonContainer}>
@@ -36,12 +50,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   topTextContainer: {
-    backgroundColor: "lightgray",
+    backgroundColor: "white",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 20 : 0,
     paddingBottom: 20,
   },
   topText: {
-    color: "white",
+    color: "black",
     fontSize: 30,
     textAlign: "center",
   },
