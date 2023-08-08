@@ -6,8 +6,9 @@ import {
   SafeAreaView,
   StatusBar,
   Button,
+  FlatList,
 } from "react-native";
-import Accordion from "./accordionComponent.js";
+import Accordion from "./src/components/accordionComponent.js";
 
 export default function App() {
   function displayCurrentTimeDate() {
@@ -29,8 +30,8 @@ export default function App() {
   }
 
   const testAcc = [
-    { title: "testing", content: "lorem ipsum" },
-    { title: "te", content: "co" },
+    { id: 0, title: "testing", content: "lorem ipsum" },
+    { id: 1, title: "te", content: "co" },
   ];
 
   return (
@@ -39,13 +40,13 @@ export default function App() {
         <View style={styles.topTextContainer}>{displayCurrentTimeDate()}</View>
 
         <View style={styles.activityContainer}>
-          <View style={styles.accContainer}>
-            <Text style={styles.accContainer}>
-              {testAcc.map(({ title, content }) => (
-                <Accordion title={title} content={content} />
-              ))}
-            </Text>
-          </View>
+          <FlatList
+            data={testAcc}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <Accordion title={item.title} content={item.content} />
+            )}
+          />
         </View>
 
         <View style={styles.buttonContainer}>
@@ -53,7 +54,7 @@ export default function App() {
             onPress={() => {
               console.log("button pressed");
             }}
-            title="Add Activity"
+            title="+"
             style={styles.addButton}
           />
         </View>
@@ -63,9 +64,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  accContainer: {
-    width: "90%",
-  },
   topTextContainer: {
     backgroundColor: "white",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 20 : 0,
@@ -79,7 +77,7 @@ const styles = StyleSheet.create({
   activityContainer: {
     height: "90%",
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: "lightblue",
     textAlign: "center",
     justifyContent: "center",
     alignContent: "center",
@@ -93,5 +91,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-end",
   },
-  addButton: {},
+  addButton: {
+    borderRadius: 100,
+  },
 });
