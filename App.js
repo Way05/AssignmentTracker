@@ -5,13 +5,16 @@ import {
   View,
   SafeAreaView,
   StatusBar,
-  Pressable,
+  Button,
 } from "react-native";
-var dateFormatter = require("./getDate.js");
+import Accordion from "./accordionComponent.js";
 
 export default function App() {
   function displayCurrentTimeDate() {
+    var dateFormatter = require("./getDate.js");
+
     const [currentDate, setCurrentDate] = useState("");
+
     const getDate = useCallback(() => {
       var formattedDate = dateFormatter.main();
 
@@ -25,17 +28,28 @@ export default function App() {
     return <Text style={styles.topText}>{currentDate}</Text>;
   }
 
+  const testAcc = [
+    { title: "testing", content: "lorem ipsum" },
+    { title: "te", content: "co" },
+  ];
+
   return (
     <SafeAreaView>
       <View>
         <View style={styles.topTextContainer}>{displayCurrentTimeDate()}</View>
 
         <View style={styles.activityContainer}>
-          {/*ITS CALLED AN ACCORDION :OOOOOOOOOOOOOOOOOOOO*/}
+          <View style={styles.accContainer}>
+            <Text style={styles.accContainer}>
+              {testAcc.map(({ title, content }) => (
+                <Accordion title={title} content={content} />
+              ))}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.buttonContainer}>
-          <Pressable
+          <Button
             onPress={() => {
               console.log("button pressed");
             }}
@@ -49,6 +63,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  accContainer: {
+    width: "90%",
+  },
   topTextContainer: {
     backgroundColor: "white",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 20 : 0,
@@ -61,10 +78,11 @@ const styles = StyleSheet.create({
   },
   activityContainer: {
     height: "90%",
-    width: "auto",
-    backgroundColor: "black",
+    width: "100%",
+    backgroundColor: "white",
+    textAlign: "center",
     justifyContent: "center",
-    alignContent: "flex-end",
+    alignContent: "center",
   },
   buttonContainer: {
     flex: 1,
