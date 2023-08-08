@@ -9,6 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import Accordion from "./src/components/accordionComponent.js";
+import ClassData from "./src/app-data/classes.js";
 
 export default function App() {
   function displayCurrentTimeDate() {
@@ -29,11 +30,6 @@ export default function App() {
     return <Text style={styles.topText}>{currentDate}</Text>;
   }
 
-  const testAcc = [
-    { id: 0, title: "testing", content: "lorem ipsum" },
-    { id: 1, title: "te", content: "co" },
-  ];
-
   return (
     <SafeAreaView>
       <View>
@@ -41,11 +37,9 @@ export default function App() {
 
         <View style={styles.activityContainer}>
           <FlatList
-            data={testAcc}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <Accordion title={item.title} content={item.content} />
-            )}
+            data={ClassData}
+            keyExtractor={(item) => item.classID.toString()}
+            renderItem={({ item }) => <Accordion title={item.title} />}
           />
         </View>
 
