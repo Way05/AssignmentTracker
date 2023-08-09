@@ -6,7 +6,8 @@ var assignmentList = [];
 for (var i = 0; i < Object.keys(data).length; i++) {
   var key = "class" + i;
   classList.push(key);
-  className.push(data);
-  assignmentList.push(data[key].content);
+  className.push(data[key].title);
+  for (var j = 0; j < data[key].content.length; j++) {
+    assignmentList.push(data[key].content[j]);
+  }
 }
-console.log(assignmentList[0][1]);

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Accordion from "./src/components/accordionComponent.js";
 import ClassData from "./src/app-data/classes.js";
+import testJSON from "./src/app-data/test.json";
 import AssignmentItem from "./src/components/classComponent.js";
 
 export default function App() {
@@ -41,18 +42,7 @@ export default function App() {
             data={ClassData}
             keyExtractor={(item) => item.classID}
             renderItem={({ item }) => (
-              <Accordion
-                title={item.title}
-                content={
-                  <FlatList
-                    data={ClassData}
-                    keyExtractor={(item, index) => item.content.assignmentID}
-                    renderItem={({ item }) => (
-                      <AssignmentItem name={item.content.assignmentName} />
-                    )}
-                  />
-                }
-              />
+              <Accordion title={item.title} content={"wtf"} />
             )}
           />
         </View>
