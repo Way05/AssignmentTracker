@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 
 const assignmentItem = ({ name, date }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.text}>
         {name} due on {date}
       </Text>
@@ -12,6 +12,9 @@ const assignmentItem = ({ name, date }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+  },
   text: {
     color: "white",
   },

@@ -10,8 +10,10 @@ export default data = [
   {
     classID: 2,
     title: "suck",
-    content: [
-      { assignmentID: 1, assignmentName: "eat poop", dueDate: "8/10/23" },
-    ],
+    content: {
+      assignmentID: 1,
+      assignmentName: "eat poop",
+      dueDate: "8/10/23",
+    },
   },
 ];

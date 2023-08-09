@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Accordion from "./src/components/accordionComponent.js";
 import ClassData from "./src/app-data/classes.js";
+import AssignmentItem from "./src/components/classComponent.js";
 
 export default function App() {
   function displayCurrentTimeDate() {
@@ -38,8 +39,21 @@ export default function App() {
         <View style={styles.activityContainer}>
           <FlatList
             data={ClassData}
-            keyExtractor={(item) => item.classID.toString()}
-            renderItem={({ item }) => <Accordion title={item.title} />}
+            keyExtractor={(item) => item.classID}
+            renderItem={({ item }) => (
+              <Accordion
+                title={item.title}
+                content={
+                  <FlatList
+                    data={ClassData}
+                    keyExtractor={(item, index) => item.content.assignmentID}
+                    renderItem={({ item }) => (
+                      <AssignmentItem name={item.content.assignmentName} />
+                    )}
+                  />
+                }
+              />
+            )}
           />
         </View>
 

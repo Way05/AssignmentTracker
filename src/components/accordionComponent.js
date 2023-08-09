@@ -11,7 +11,6 @@ import {
 import { toggleAnimation } from "../animations/toggleAnimation";
 import ClassData from "../app-data/classes.js";
 import AssignmentItem from "./classComponent.js";
-import JSON from "../app-data/test.json";
 
 const accordion = ({ title, content }) => {
   const [isActive, setActive] = useState(false);
@@ -48,15 +47,7 @@ const accordion = ({ title, content }) => {
           </Animated.View>
         </View>
       </TouchableOpacity>
-      <View>
-        {isActive && (
-          <FlatList
-            data={JSON}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => <AssignmentItem name={item} />}
-          />
-        )}
-      </View>
+      <View>{isActive && <Text>{content}</Text>}</View>
     </View>
   );
 };
