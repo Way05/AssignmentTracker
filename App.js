@@ -32,6 +32,28 @@ export default function App() {
     return <Text style={styles.topText}>{currentDate}</Text>;
   }
 
+  function getClasses(id, count) {
+    var child = [];
+    for (let j = 0; j < count; j++) {
+      child.push([
+        ClassData[id - 1].content[j].assignmentName,
+        ClassData[id - 1].content[j].dueDate,
+      ]);
+      console.log(child);
+    }
+    return (
+      <FlatList
+        data={child}
+        renderItem={({ item }) => (
+          <View style={styles.tHolder}>
+            <Text style={styles.t}>{item[0]}</Text>
+            <Text style={styles.t}>{item[1]}</Text>
+          </View>
+        )}
+      />
+    );
+  }
+
   return (
     <SafeAreaView>
       <View>
@@ -42,7 +64,10 @@ export default function App() {
             data={ClassData}
             keyExtractor={(item) => item.classID}
             renderItem={({ item }) => (
-              <Accordion title={item.title} content={"wtf"} />
+              <Accordion
+                title={item.title}
+                content={getClasses(item.classID, item.taskCount)}
+              />
             )}
           />
         </View>
@@ -91,5 +116,15 @@ const styles = StyleSheet.create({
   },
   addButton: {
     borderRadius: 100,
+  },
+  tHolder: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  t: {
+    width: "50%",
+    color: "white",
+    textAlign: "center",
   },
 });

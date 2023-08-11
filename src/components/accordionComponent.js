@@ -48,7 +48,7 @@ const accordion = ({ title, content }) => {
           </Animated.View>
         </View>
       </TouchableOpacity>
-      <View>{isActive && <Text style={styles.bodyText}>{content}</Text>}</View>
+      {isActive && <View style={styles.bodyText}>{content}</View>}
     </View>
   );
 };
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
 
     overflow: "hidden",
   },
+  bodyHolder: {
+    width: "100%",
+  },
   titleHolder: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -80,6 +83,8 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     color: "white",
+
+    width: "100%",
   },
   icon: {
     color: "white",
