@@ -9,9 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import Accordion from "./src/components/accordionComponent.js";
-import ClassData from "./src/app-data/classes.js";
-import testJSON from "./src/app-data/test.json";
-import AssignmentItem from "./src/components/classComponent.js";
+import ClassData from "./src/app-data/classesOBJ.js";
 
 export default function App() {
   function displayCurrentTimeDate() {

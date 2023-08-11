@@ -9,9 +9,6 @@ import {
   FlatList,
 } from "react-native";
 import { toggleAnimation } from "../animations/toggleAnimation";
-import ClassData from "../app-data/classes.js";
-import AssignmentItem from "./classComponent.js";
-import JSON from "../app-data/test.json";
 
 const accordion = ({ title, content }) => {
   const [isActive, setActive] = useState(false);

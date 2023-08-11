@@ -1,5 +1,5 @@
 {
-  "class": {
+  "class0": {
     "classID": 1,
     "title": "ap calc",
     "assignmentCount": 2,
@@ -12,7 +12,7 @@
       { "assignmentID": 2, "assignmentName": "worksheet", "dueDate": "8/15/23" }
     ]
   },
-  "class": {
+  "class1": {
     "classID": 2,
     "title": "suck",
     "assignmentCount": 1,
