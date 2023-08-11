@@ -20,4 +20,21 @@ export default data = [
       },
     ],
   },
+  {
+    classID: 3,
+    title: "classy",
+    taskCount: 1,
+    content: [
+      {
+        assignmentID: 1,
+        assignmentName: "an assignment",
+        dueDate: "8/10/23",
+      },
+      {
+        assignmentID: 2,
+        assignmentName: "or two",
+        dueDate: "8/10/23",
+      },
+    ],
+  },
 ];

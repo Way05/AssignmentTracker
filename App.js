@@ -9,6 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import Accordion from "./src/components/accordionComponent.js";
+import ClassDisplay from "./src/components/classComponent.js";
 import ClassData from "./src/app-data/classesOBJ.js";
 
 export default function App() {
@@ -43,10 +44,7 @@ export default function App() {
       <FlatList
         data={child}
         renderItem={({ item }) => (
-          <View style={styles.tHolder}>
-            <Text style={styles.t}>{item[0]}</Text>
-            <Text style={styles.t}>{item[1]}</Text>
-          </View>
+          <ClassDisplay name={item[0]} date={item[1]} />
         )}
       />
     );
@@ -114,15 +112,5 @@ const styles = StyleSheet.create({
   },
   addButton: {
     borderRadius: 100,
-  },
-  tHolder: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  t: {
-    width: "50%",
-    color: "white",
-    textAlign: "center",
   },
 });

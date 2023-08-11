@@ -1,23 +1,26 @@
 import { React } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-const assignmentItem = ({ name, date }) => {
+const classes = ({ name, date }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
-        {name} due on {date}
-      </Text>
+    <View style={styles.tHolder}>
+      <Text style={styles.t}>{name}</Text>
+      <Text style={styles.t}>{date}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  tHolder: {
     width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  text: {
+  t: {
+    width: "50%",
     color: "white",
+    textAlign: "center",
   },
 });
 
-export default assignmentItem;
+export default classes;
