@@ -62,6 +62,8 @@ export default function App() {
 
   const [nameText, setNameText] = useState("");
 
+  var newAssignment;
+
   return (
     <SafeAreaView>
       <View>
@@ -109,17 +111,33 @@ export default function App() {
               value={nameText}
               placeholder="name"
             />
-            <Pressable
-              onPress={() => {
-                setModalVisibility(!modalVisible);
-                setNameText("");
-              }}
-              style={styles.exitButton}
-            >
-              <Text style={styles.exitButtonText}>
-                {nameText !== "" ? "save" : "close"}
-              </Text>
-            </Pressable>
+            <View style={styles.pressables}>
+              <Pressable
+                onPress={() => {
+                  setModalVisibility(!modalVisible);
+                  newAssignment = nameText;
+                  ClassData.push({
+                    classID: ClassData.length + 1,
+                    title: newAssignment,
+                    taskCount: 0,
+                    content: [],
+                  });
+                  setNameText("");
+                }}
+                style={styles.pressable}
+              >
+                <Text style={styles.buttonText}>save</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  setModalVisibility(!modalVisible);
+                  setNameText("");
+                }}
+                style={styles.pressable}
+              >
+                <Text style={styles.buttonText}>close</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -150,7 +168,6 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   buttonContainer: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
 
@@ -190,19 +207,25 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   modalText: {},
-  exitButton: {
-    borderRadius: 10,
-    width: 50,
-    height: 30,
+  pressables: {
+    width: 110,
 
     position: "absolute",
     bottom: 10,
     right: 10,
 
     alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  pressable: {
+    borderRadius: 10,
+    width: 50,
+    height: 30,
+
+    alignItems: "center",
     justifyContent: "center",
 
     backgroundColor: "black",
   },
-  exitButtonText: { color: "white" },
 });
