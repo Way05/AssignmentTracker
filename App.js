@@ -9,12 +9,14 @@ import {
   Pressable,
   Modal,
   Dimensions,
+  TextInput,
 } from "react-native";
 import Accordion from "./src/components/accordionComponent.js";
 import ClassDisplay from "./src/components/classComponent.js";
 import ClassData from "./src/app-data/classesOBJ.js";
 
-const SCREEN_HEIGHT = Dimensions.get("screen").height; // device height
+// device height
+const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
@@ -45,7 +47,6 @@ export default function App() {
         ClassData[id - 1].content[j].assignmentName,
         ClassData[id - 1].content[j].dueDate,
       ]);
-      console.log(child);
     }
     return (
       <FlatList
@@ -58,6 +59,8 @@ export default function App() {
   }
 
   const [modalVisible, setModalVisibility] = useState(false);
+
+  const [nameText, setNameText] = useState("");
 
   return (
     <SafeAreaView>
@@ -100,13 +103,22 @@ export default function App() {
       >
         <View style={styles.modalParent}>
           <View style={styles.modalContent}>
-            <Text>window</Text>
+            <Text style={styles.modalText}>Create New Activity</Text>
+            <TextInput
+              onChangeText={setNameText}
+              value={nameText}
+              placeholder="name"
+            />
             <Pressable
               onPress={() => {
                 setModalVisibility(!modalVisible);
+                setNameText("");
               }}
+              style={styles.exitButton}
             >
-              <Text>close</Text>
+              <Text style={styles.exitButtonText}>
+                {nameText !== "" ? "save" : "close"}
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -143,14 +155,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     position: "absolute",
-    bottom: BOTTOM_NAV_BAR_HEIGHT,
-    right: 0,
+    bottom: BOTTOM_NAV_BAR_HEIGHT + 10,
+    right: 10,
   },
   addButton: {
     borderRadius: 10,
 
-    width: 50,
-    height: 30,
+    width: 80,
+    height: 80,
 
     alignItems: "center",
     justifyContent: "center",
@@ -159,6 +171,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
+
+    fontWeight: "bold",
   },
   modalParent: {
     flex: 1,
@@ -167,8 +181,28 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     borderRadius: 20,
-    padding: 35,
+    width: 300,
+    height: 200,
+
+    alignItems: "center",
+    justifyContent: "center",
 
     backgroundColor: "white",
   },
+  modalText: {},
+  exitButton: {
+    borderRadius: 10,
+    width: 50,
+    height: 30,
+
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+
+    alignItems: "center",
+    justifyContent: "center",
+
+    backgroundColor: "black",
+  },
+  exitButtonText: { color: "white" },
 });
