@@ -5,12 +5,19 @@ import {
   View,
   SafeAreaView,
   StatusBar,
-  Button,
   FlatList,
+  Pressable,
+  Modal,
+  Dimensions,
 } from "react-native";
 import Accordion from "./src/components/accordionComponent.js";
 import ClassDisplay from "./src/components/classComponent.js";
 import ClassData from "./src/app-data/classesOBJ.js";
+
+const SCREEN_HEIGHT = Dimensions.get("screen").height; // device height
+const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
+const WINDOW_HEIGHT = Dimensions.get("window").height;
+const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
 
 export default function App() {
   function displayCurrentTimeDate() {
@@ -50,6 +57,8 @@ export default function App() {
     );
   }
 
+  const [modalVisible, setModalVisibility] = useState(false);
+
   return (
     <SafeAreaView>
       <View>
@@ -65,19 +74,43 @@ export default function App() {
                 content={getClasses(item.classID, item.taskCount)}
               />
             )}
+            style={styles.activityList}
           />
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button
+          <Pressable
             onPress={() => {
-              console.log("button pressed");
+              setModalVisibility(true);
             }}
-            title="+"
             style={styles.addButton}
-          />
+          >
+            <Text style={styles.buttonText}>Add</Text>
+          </Pressable>
         </View>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisibility(!modalVisible);
+        }}
+      >
+        <View style={styles.modalParent}>
+          <View style={styles.modalContent}>
+            <Text>window</Text>
+            <Pressable
+              onPress={() => {
+                setModalVisibility(!modalVisible);
+              }}
+            >
+              <Text>close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -101,16 +134,41 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
   },
+  activityList: {
+    margin: 20,
+  },
   buttonContainer: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+
     position: "absolute",
-    bottom: 40,
-    right: 10,
-    height: 50,
-    width: "100%",
-    alignItems: "flex-end",
+    bottom: BOTTOM_NAV_BAR_HEIGHT,
+    right: 0,
   },
   addButton: {
-    borderRadius: 100,
+    borderRadius: 10,
+
+    width: 50,
+    height: 30,
+
+    alignItems: "center",
+    justifyContent: "center",
+
+    backgroundColor: "black",
+  },
+  buttonText: {
+    color: "white",
+  },
+  modalParent: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalContent: {
+    borderRadius: 20,
+    padding: 35,
+
+    backgroundColor: "white",
   },
 });
