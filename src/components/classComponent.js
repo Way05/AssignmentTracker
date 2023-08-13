@@ -5,7 +5,7 @@ const classes = ({ name, date }) => {
   return (
     <View style={styles.tHolder}>
       <Text style={styles.t}>{name}</Text>
-      <Text style={styles.t}>{date}</Text>
+      <Text style={styles.t}>{date} days left</Text>
     </View>
   );
 };
