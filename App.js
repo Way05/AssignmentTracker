@@ -50,10 +50,15 @@ export default function App() {
       const diffTime = Math.abs(dd - today);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-      child.push([
-        ClassData[id - 1].content[j].assignmentName,
-        `${diffDays} days left`,
-      ]);
+      child.push([ClassData[id - 1].content[j].assignmentName, diffDays]);
+    }
+
+    for (let i = 0; i < child.length - 1; i++) {
+      if (child[i][1] > child[i + 1][1]) {
+        const placeholder = child[i];
+        child[i] = child[i + 1];
+        child[i + 1] = placeholder;
+      }
     }
     return (
       <FlatList
