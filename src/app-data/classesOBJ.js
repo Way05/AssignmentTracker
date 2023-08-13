@@ -4,8 +4,16 @@ export default data = [
     title: "ap calc",
     taskCount: 2,
     content: [
-      { assignmentID: 1, assignmentName: "test review", dueDate: "8/20/23" },
-      { assignmentID: 2, assignmentName: "worksheet", dueDate: "8/15/23" },
+      {
+        assignmentID: 1,
+        assignmentName: "test review",
+        dueDate: "2023-8-20T00:00:00",
+      },
+      {
+        assignmentID: 2,
+        assignmentName: "worksheet",
+        dueDate: "2023-8-15T00:00:00",
+      },
     ],
   },
   {
@@ -16,7 +24,7 @@ export default data = [
       {
         assignmentID: 1,
         assignmentName: "eat poop",
-        dueDate: "8/10/23",
+        dueDate: "2023-8-10T00:00:00",
       },
     ],
   },
@@ -28,12 +36,12 @@ export default data = [
       {
         assignmentID: 1,
         assignmentName: "an assignment",
-        dueDate: "8/10/23",
+        dueDate: "2023-8-10T00:00:00",
       },
       {
         assignmentID: 2,
         assignmentName: "or two",
-        dueDate: "8/10/23",
+        dueDate: "j2023-8-10T00:00:00",
       },
     ],
   },

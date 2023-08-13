@@ -1,10 +1,14 @@
 module.exports = {
   main: function () {
     var month = new Date().getMonth() + 1;
-    var day = new Date().getUTCDate() + 1;
-    var dayUTC = new Date().getUTCDate();
+    var day = new Date().getUTCDate();
+    var dayUTC = new Date().getUTCDate() - 1;
 
     day = day % 7;
+
+    if (day == 0) {
+      day = 1;
+    }
 
     month.toString();
     day.toString();

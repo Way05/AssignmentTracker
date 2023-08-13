@@ -42,10 +42,17 @@ export default function App() {
 
   function getClasses(id, count) {
     var child = [];
+
+    const today = new Date();
+
     for (let j = 0; j < count; j++) {
+      const dd = new Date(ClassData[id - 1].content[j].dueDate);
+      const diffTime = Math.abs(dd - today);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
       child.push([
         ClassData[id - 1].content[j].assignmentName,
-        ClassData[id - 1].content[j].dueDate,
+        `${diffDays} days left`,
       ]);
     }
     return (
@@ -61,8 +68,6 @@ export default function App() {
   const [modalVisible, setModalVisibility] = useState(false);
 
   const [nameText, setNameText] = useState("");
-
-  var newAssignment;
 
   return (
     <SafeAreaView>
@@ -115,7 +120,7 @@ export default function App() {
               <Pressable
                 onPress={() => {
                   setModalVisibility(!modalVisible);
-                  newAssignment = nameText;
+                  var newAssignment = nameText;
                   ClassData.push({
                     classID: ClassData.length + 1,
                     title: newAssignment,
