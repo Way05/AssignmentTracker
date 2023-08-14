@@ -6,11 +6,10 @@ import {
   TouchableOpacity,
   Animated,
   LayoutAnimation,
-  FlatList,
 } from "react-native";
 import { toggleAnimation } from "../animations/toggleAnimation";
 
-const accordion = ({ title, content }) => {
+const Accordion = ({ title, content }) => {
   const [isActive, setActive] = useState(false);
 
   const animationController = useRef(new Animated.Value(0)).current;
@@ -91,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default accordion;
+export default Accordion;

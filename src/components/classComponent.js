@@ -1,7 +1,7 @@
 import { React } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-const classes = ({ name, date }) => {
+const ClassDisplay = ({ name, date }) => {
   return (
     <View style={styles.tHolder}>
       <Text style={styles.t}>{name}</Text>
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default classes;
+export default ClassDisplay;

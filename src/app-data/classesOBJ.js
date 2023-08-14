@@ -1,4 +1,4 @@
-export default data = [
+export default ClassData = [
   {
     classID: 1,
     title: "ap calc",

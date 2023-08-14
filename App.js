@@ -1,4 +1,4 @@
-import { React, useCallback, useState, useEffect } from "react";
+import { React, useCallback, useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,11 +10,14 @@ import {
   Modal,
   Dimensions,
   TextInput,
+  Animated,
+  LayoutAnimation,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather.js";
 import Accordion from "./src/components/accordionComponent.js";
 import ClassDisplay from "./src/components/classComponent.js";
 import ClassData from "./src/app-data/classesOBJ.js";
+import { toggleAnimation } from "./src/animations/toggleAnimation.js";
 
 // device height
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
@@ -73,8 +76,24 @@ export default function App() {
   }
 
   const [modalVisible, setModalVisibility] = useState(false);
-
   const [nameText, setNameText] = useState("");
+
+  const [hidden, setHidden] = useState(false);
+  const animationController = useRef(new Animated.Value(0)).current;
+  const toggleButtons = () => {
+    const config = {
+      duration: 200,
+      toValue: hidden ? 0 : 1,
+      useNativeDriver: true,
+    };
+    Animated.timing(animationController, config).start();
+    LayoutAnimation.configureNext(toggleAnimation);
+    setHidden(!hidden);
+  };
+  const iconTransform = animationController.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "225deg"],
+  });
 
   return (
     //SAFEAREAVIEW is for IOS top bezel
@@ -100,13 +119,30 @@ export default function App() {
         </View>
 
         <View style={styles.buttonContainer}>
+          {hidden && (
+            <Pressable
+              onPress={() => {
+                setModalVisibility(true);
+              }}
+              style={styles.minorButton}
+            >
+              <Text style={styles.buttonText}>Activity</Text>
+            </Pressable>
+          )}
+          {hidden && (
+            <Pressable onPress={() => {}} style={styles.minorButton}>
+              <Text style={styles.buttonText}>Task</Text>
+            </Pressable>
+          )}
           <Pressable
             onPress={() => {
-              setModalVisibility(true);
+              toggleButtons();
             }}
             style={styles.addButton}
           >
-            <Text style={styles.buttonText}>Add</Text>
+            <Animated.View style={{ transform: [{ rotateZ: iconTransform }] }}>
+              <Text style={styles.buttonText}>{hidden ? "+" : "Add"}</Text>
+            </Animated.View>
           </Pressable>
         </View>
       </View>
@@ -203,6 +239,19 @@ const styles = StyleSheet.create({
 
     width: 80,
     height: 80,
+
+    alignItems: "center",
+    justifyContent: "center",
+
+    backgroundColor: "black",
+  },
+  minorButton: {
+    borderRadius: 10,
+
+    height: 40,
+    width: 80,
+
+    marginBottom: 5,
 
     alignItems: "center",
     justifyContent: "center",
