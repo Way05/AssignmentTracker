@@ -11,6 +11,7 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
+import Icon from "react-native-vector-icons/Feather.js";
 import Accordion from "./src/components/accordionComponent.js";
 import ClassDisplay from "./src/components/classComponent.js";
 import ClassData from "./src/app-data/classesOBJ.js";
@@ -47,7 +48,7 @@ export default function App() {
 
     for (let j = 0; j < count; j++) {
       const dd = new Date(ClassData[id - 1].content[j].dueDate);
-      const diffTime = Math.abs(dd - today);
+      const diffTime = dd - today;
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
       child.push([ClassData[id - 1].content[j].assignmentName, diffDays]);
@@ -60,6 +61,7 @@ export default function App() {
         child[i + 1] = placeholder;
       }
     }
+
     return (
       <FlatList
         data={child}
@@ -75,9 +77,13 @@ export default function App() {
   const [nameText, setNameText] = useState("");
 
   return (
+    //SAFEAREAVIEW is for IOS top bezel
     <SafeAreaView>
       <View>
-        <View style={styles.topTextContainer}>{displayCurrentTimeDate()}</View>
+        <View style={styles.topTextContainer}>
+          <Icon name="menu" style={styles.settingsIcon} />
+          <Text style={styles.topText}>{displayCurrentTimeDate()}</Text>
+        </View>
 
         <View style={styles.activityContainer}>
           <FlatList
@@ -160,16 +166,23 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 20 : 0,
     paddingBottom: 20,
+
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
   topText: {
     color: "black",
     fontSize: 30,
     textAlign: "center",
   },
+  settingsIcon: {
+    fontSize: 30,
+  },
   activityContainer: {
     height: "90%",
     width: "100%",
-    backgroundColor: "lightblue",
+    backgroundColor: "white",
     textAlign: "center",
     justifyContent: "center",
     alignContent: "center",
@@ -215,6 +228,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     backgroundColor: "white",
+
+    //IOS DROP SHADOW
+    shadowColor: "black",
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      width: -4,
+      height: 4,
+    },
+    shadowRadius: 3,
+    //ANDROID DROP SHADOW
+    elevation: 10,
   },
   modalText: {},
   pressables: {
