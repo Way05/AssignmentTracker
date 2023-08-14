@@ -31,7 +31,7 @@ export default data = [
   {
     classID: 3,
     title: "classy",
-    taskCount: 1,
+    taskCount: 2,
     content: [
       {
         assignmentID: 1,
@@ -41,7 +41,7 @@ export default data = [
       {
         assignmentID: 2,
         assignmentName: "or two",
-        dueDate: "j2023-8-10T00:00:00",
+        dueDate: "2023-8-10T00:00:00",
       },
     ],
   },
