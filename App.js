@@ -75,8 +75,10 @@ export default function App() {
     );
   }
 
-  const [modalVisible, setModalVisibility] = useState(false);
+  const [modal1Visible, setModal1Visibility] = useState(false);
   const [nameText, setNameText] = useState("");
+
+  const [modal2Visible, setModal2Visibility] = useState(false);
 
   const [hidden, setHidden] = useState(false);
   const animStatus1 = useRef(new Animated.Value(0)).current;
@@ -139,7 +141,7 @@ export default function App() {
           >
             <Pressable
               onPress={() => {
-                setModalVisibility(true);
+                setModal1Visibility(true);
               }}
               style={styles.minorButton}
             >
@@ -149,7 +151,12 @@ export default function App() {
           <Animated.View
             style={{ transform: [{ translateX: buttonTransform2 }] }}
           >
-            <Pressable onPress={() => {}} style={styles.minorButton}>
+            <Pressable
+              onPress={() => {
+                setModal2Visibility(true);
+              }}
+              style={styles.minorButton}
+            >
               <Text style={styles.buttonText}>Task</Text>
             </Pressable>
           </Animated.View>
@@ -170,9 +177,9 @@ export default function App() {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={modal1Visible}
         onRequestClose={() => {
-          setModalVisibility(!modalVisible);
+          setModal1Visibility(!modalVisible);
         }}
       >
         <View style={styles.modalParent}>
@@ -186,7 +193,7 @@ export default function App() {
             <View style={styles.pressables}>
               <Pressable
                 onPress={() => {
-                  setModalVisibility(!modalVisible);
+                  setModal1Visibility(!modal1Visible);
                   var newAssignment = nameText;
                   ClassData.push({
                     classID: ClassData.length + 1,
@@ -202,7 +209,48 @@ export default function App() {
               </Pressable>
               <Pressable
                 onPress={() => {
-                  setModalVisibility(!modalVisible);
+                  setModal1Visibility(!modal1Visible);
+                  setNameText("");
+                }}
+                style={styles.pressable}
+              >
+                <Text style={styles.buttonText}>close</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modal2Visible}
+        onRequestClose={() => {
+          setModal2Visibility(!modal2Visible);
+        }}
+      >
+        <View style={styles.modalParent}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Add Task</Text>
+            <TextInput
+              onChangeText={setNameText}
+              value={nameText}
+              placeholder="name"
+            />
+            <View style={styles.pressables}>
+              <Pressable
+                onPress={() => {
+                  setModal2Visibility(!modal2Visible);
+                  //save data here
+                  setNameText("");
+                }}
+                style={styles.pressable}
+              >
+                <Text style={styles.buttonText}>save</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  setModal2Visibility(!modal2Visible);
                   setNameText("");
                 }}
                 style={styles.pressable}
