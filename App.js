@@ -18,6 +18,7 @@ import Accordion from "./src/components/accordionComponent.js";
 import ClassDisplay from "./src/components/classComponent.js";
 import ClassData from "./src/app-data/classesOBJ.js";
 import { toggleAnimation } from "./src/animations/toggleAnimation.js";
+import DropDownPicker from "react-native-dropdown-picker";
 
 // device height
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
@@ -112,6 +113,20 @@ export default function App() {
     outputRange: [100, 0],
   });
 
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState(getItems());
+  function getItems() {
+    const classNames = [];
+    for (let i = 0; i < ClassData.length; i++) {
+      classNames.push({
+        label: ClassData[i].title,
+        value: ClassData[i].classID - 1,
+      });
+    }
+    return classNames;
+  }
+
   return (
     //SAFEAREAVIEW is for IOS top bezel
     <SafeAreaView>
@@ -194,10 +209,10 @@ export default function App() {
               <Pressable
                 onPress={() => {
                   setModal1Visibility(!modal1Visible);
-                  var newAssignment = nameText;
+                  var newClass = nameText;
                   ClassData.push({
                     classID: ClassData.length + 1,
-                    title: newAssignment,
+                    title: newClass,
                     taskCount: 0,
                     content: [],
                   });
@@ -232,16 +247,31 @@ export default function App() {
         <View style={styles.modalParent}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>Add Task</Text>
+            <DropDownPicker
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+            />
             <TextInput
               onChangeText={setNameText}
               value={nameText}
               placeholder="name"
             />
+            {/* https://reactnative.dev/docs/datepickerios */}
             <View style={styles.pressables}>
               <Pressable
                 onPress={() => {
+                  console.log(nameText);
                   setModal2Visibility(!modal2Visible);
-                  //save data here
+                  var activity = value;
+                  var newTask = nameText;
+                  ClassData[activity].content.push({
+                    assignmentName: newTask,
+                    dueDate: "TEMPORARY SOLUTION LMAO",
+                  });
                   setNameText("");
                 }}
                 style={styles.pressable}
