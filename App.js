@@ -246,20 +246,24 @@ export default function App() {
       >
         <View style={styles.modalParent}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Add Task</Text>
-            <DropDownPicker
-              open={open}
-              value={value}
-              items={items}
-              setOpen={setOpen}
-              setValue={setValue}
-              setItems={setItems}
-            />
-            <TextInput
-              onChangeText={setNameText}
-              value={nameText}
-              placeholder="name"
-            />
+            <View style={styles.modalSubContent}>
+              <Text style={styles.modalText}>Add Task</Text>
+              <DropDownPicker
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                style={styles.dropdown}
+              />
+              <TextInput
+                onChangeText={setNameText}
+                value={nameText}
+                placeholder="name"
+              />
+            </View>
+
             {/* https://reactnative.dev/docs/datepickerios */}
             <View style={styles.pressables}>
               <Pressable
@@ -274,8 +278,12 @@ export default function App() {
                   ClassData[activity].taskCount++;
                   setNameText("");
                 }}
-                style={styles.pressable}
-                disabled={value == null}
+                style={
+                  value == null || nameText == ""
+                    ? (style = { opacity: 0 })
+                    : styles.pressable
+                }
+                disabled={value == null || nameText == ""}
               >
                 <Text style={styles.buttonText}>save</Text>
               </Pressable>
@@ -366,6 +374,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    alignContent: "center",
   },
   modalContent: {
     borderRadius: 20,
@@ -388,6 +397,11 @@ const styles = StyleSheet.create({
     //ANDROID DROP SHADOW
     elevation: 10,
   },
+  modalSubContent: {
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   modalText: {},
   pressables: {
     width: 110,
@@ -409,5 +423,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     backgroundColor: "black",
+  },
+  dropdown: {
+    width: 200,
+
+    paddingHorizontal: 15,
+    margin: 7,
+    marginLeft: "50%",
+    transform: [{ translateX: -100 }],
   },
 });
