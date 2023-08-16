@@ -264,7 +264,6 @@ export default function App() {
             <View style={styles.pressables}>
               <Pressable
                 onPress={() => {
-                  console.log(nameText);
                   setModal2Visibility(!modal2Visible);
                   var activity = value;
                   var newTask = nameText;
@@ -272,9 +271,11 @@ export default function App() {
                     assignmentName: newTask,
                     dueDate: "TEMPORARY SOLUTION LMAO",
                   });
+                  ClassData[activity].taskCount++;
                   setNameText("");
                 }}
                 style={styles.pressable}
+                disabled={value == null}
               >
                 <Text style={styles.buttonText}>save</Text>
               </Pressable>
