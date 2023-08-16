@@ -1,4 +1,4 @@
-run getItems everytime activity is added/removed
-redisplay accordion list items every time task is added/removed
 get time picker installed
+add functionality to remove activities/tasks
 color themes
+schoology calendar import??
