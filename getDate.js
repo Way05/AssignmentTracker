@@ -2,7 +2,7 @@ module.exports = {
   main: function () {
     var month = new Date().getMonth() + 1;
     var day = new Date().getUTCDate();
-    var dayUTC = new Date().getUTCDate() - 1;
+    var dayUTC = new Date().getUTCDate();
 
     day = day % 7;
 
