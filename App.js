@@ -20,12 +20,15 @@ import ClassData from "./src/app-data/classesOBJ.js";
 import { toggleAnimation } from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-date-picker";
+import THEMES from "./src/app-data/themes.js";
 
 // device height
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
+
+const [theme, setTheme] = useState(THEMES.DARK);
 
 export default function App() {
   function displayCurrentTimeDate() {
@@ -316,7 +319,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   topTextContainer: {
-    backgroundColor: "white",
+    backgroundColor: theme.background,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 20 : 0,
     paddingBottom: 20,
 
@@ -325,7 +328,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   topText: {
-    color: "black",
+    color: theme.text,
     fontSize: 30,
     textAlign: "center",
   },
@@ -335,7 +338,7 @@ const styles = StyleSheet.create({
   activityContainer: {
     height: "90%",
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: theme.background,
     textAlign: "center",
     justifyContent: "center",
     alignContent: "center",
@@ -360,7 +363,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    backgroundColor: "black",
+    backgroundColor: theme.button,
   },
   minorButton: {
     borderRadius: 10,
@@ -376,7 +379,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
   buttonText: {
-    color: "white",
+    color: theme.text,
 
     fontWeight: "bold",
   },
@@ -394,10 +397,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    backgroundColor: "white",
+    backgroundColor: theme.background,
 
     //IOS DROP SHADOW
-    shadowColor: "black",
+    shadowColor: theme.shadow,
     shadowOpacity: 0.2,
     shadowOffset: {
       width: -4,
@@ -435,7 +438,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    backgroundColor: "black",
+    backgroundColor: theme.button,
   },
   dropdown: {
     width: 200,
