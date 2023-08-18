@@ -248,7 +248,7 @@ export default function App() {
         }}
       >
         <View style={styles.modalParent}>
-          <View style={styles.modalContent}>
+          <View style={[styles.modalContent, styles.datePickerModal]}>
             <View style={styles.modalSubContent}>
               <Text style={styles.modalText}>Add Task</Text>
               <DropDownPicker
@@ -269,7 +269,11 @@ export default function App() {
 
             {/* https://reactnative.dev/docs/datepickerios */}
 
-            <DatePicker date={date} onDateChange={setDate} />
+            <DatePicker
+              date={date}
+              onDateChange={setDate}
+              style={styles.datePicker}
+            />
 
             <View style={styles.pressables}>
               <Pressable
@@ -279,7 +283,7 @@ export default function App() {
                   var newTask = nameText;
                   ClassData[activity].content.push({
                     assignmentName: newTask,
-                    dueDate: "TEMPORARY SOLUTION LMAO",
+                    dueDate: date,
                   });
                   ClassData[activity].taskCount++;
                   setNameText("");
@@ -408,6 +412,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  datePickerModal: {
+    height: 500,
+  },
   modalText: {},
   pressables: {
     width: 110,
@@ -437,5 +444,8 @@ const styles = StyleSheet.create({
     margin: 7,
     marginLeft: "50%",
     transform: [{ translateX: -100 }],
+  },
+  datePicker: {
+    margin: 5,
   },
 });
