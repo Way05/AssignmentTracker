@@ -19,6 +19,7 @@ import ClassDisplay from "./src/components/classComponent.js";
 import ClassData from "./src/app-data/classesOBJ.js";
 import { toggleAnimation } from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
+import DatePicker from "react-native-date-picker";
 
 // device height
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
@@ -126,6 +127,8 @@ export default function App() {
     }
     return classNames;
   }
+
+  const [date, setDate] = useState(new Date());
 
   return (
     //SAFEAREAVIEW is for IOS top bezel
@@ -265,6 +268,9 @@ export default function App() {
             </View>
 
             {/* https://reactnative.dev/docs/datepickerios */}
+
+            <DatePicker date={date} onDateChange={setDate} />
+
             <View style={styles.pressables}>
               <Pressable
                 onPress={() => {
