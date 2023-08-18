@@ -268,7 +268,7 @@ export default function App() {
             </View>
 
             {/* https://reactnative.dev/docs/datepickerios */}
-
+            {/* MUST RUN DATEPICKER ON DEV BUILD */}
             <DatePicker
               date={date}
               onDateChange={setDate}
