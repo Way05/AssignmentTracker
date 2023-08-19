@@ -28,7 +28,7 @@ const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
 
-const [theme, setTheme] = useState(THEMES.DARK);
+// const [theme, setTheme] = useState(THEMES.DARK);
 
 export default function App() {
   function displayCurrentTimeDate() {
