@@ -1,4 +1,4 @@
-import { React, useCallback, useState, useEffect, useRef } from "react";
+import { React, useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,13 +14,14 @@ import {
   LayoutAnimation,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather.js";
-import Accordion from "./src/components/accordionComponent.js";
-import ClassDisplay from "./src/components/classComponent.js";
+import Accordion from "./src/components/accordionComponent.tsx";
+import ClassDisplay from "./src/components/classComponent.tsx";
 import ClassData from "./src/app-data/classesOBJ.js";
 import { toggleAnimation } from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-date-picker";
 import THEMES from "./src/app-data/themes.js";
+import DateDisplay from "./src/components/dateComponent.tsx";
 
 // device height
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
@@ -31,24 +32,6 @@ const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
 // const [theme, setTheme] = useState(THEMES.DARK);
 
 export default function App() {
-  function displayCurrentTimeDate() {
-    var dateFormatter = require("./getDate.js");
-
-    const [currentDate, setCurrentDate] = useState("");
-
-    const getDate = useCallback(() => {
-      var formattedDate = dateFormatter.main();
-
-      setCurrentDate(formattedDate);
-    }, []);
-    useEffect(() => {
-      const intervalID = setInterval(getDate, 1000);
-      return () => clearInterval(intervalID);
-    }, [getDate]);
-
-    return <Text style={styles.topText}>{currentDate}</Text>;
-  }
-
   function getClasses(id, count) {
     var child = [];
 
@@ -139,7 +122,7 @@ export default function App() {
       <View>
         <View style={styles.topTextContainer}>
           <Icon name="menu" style={styles.settingsIcon} />
-          <Text style={styles.topText}>{displayCurrentTimeDate()}</Text>
+          <DateDisplay />
         </View>
 
         <View style={styles.activityContainer}>
@@ -326,11 +309,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-  },
-  topText: {
-    color: theme.text,
-    fontSize: 30,
-    textAlign: "center",
   },
   settingsIcon: {
     fontSize: 30,
