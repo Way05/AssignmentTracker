@@ -5,7 +5,7 @@ export default THEMES = {
     shadow: "black",
     activities: "black",
     tasks: "black",
-    buttons: "white",
+    button: "white",
     text: "white",
   },
 };

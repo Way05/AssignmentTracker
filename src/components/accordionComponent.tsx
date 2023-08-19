@@ -11,7 +11,7 @@ import { toggleAnimation } from "../animations/toggleAnimation";
 
 export type Props = {
   title: string;
-  content: string;
+  content: React.JSX.Element;
 };
 const Accordion: React.FC<Props> = ({ title, content }) => {
   const [isActive, setActive] = useState(false);

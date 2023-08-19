@@ -5,14 +5,12 @@ export default ClassData = [
     taskCount: 2,
     content: [
       {
-        assignmentID: 1,
         assignmentName: "test review",
-        dueDate: "2023-8-20T00:00:00",
+        dueDate: new Date("2023-8-20T00:00:00"),
       },
       {
-        assignmentID: 2,
         assignmentName: "worksheet",
-        dueDate: "2023-8-15T00:00:00",
+        dueDate: new Date("2023-8-15T00:00:00"),
       },
     ],
   },
@@ -22,9 +20,8 @@ export default ClassData = [
     taskCount: 1,
     content: [
       {
-        assignmentID: 1,
         assignmentName: "eat poop",
-        dueDate: "2023-8-10T00:00:00",
+        dueDate: new Date("2023-8-10T00:00:00"),
       },
     ],
   },
@@ -34,14 +31,12 @@ export default ClassData = [
     taskCount: 2,
     content: [
       {
-        assignmentID: 1,
         assignmentName: "an assignment",
-        dueDate: "2023-8-10T00:00:00",
+        dueDate: new Date("2023-8-10T00:00:00"),
       },
       {
-        assignmentID: 2,
         assignmentName: "or two",
-        dueDate: "2023-8-10T00:00:00",
+        dueDate: new Date("2023-8-10T00:00:00"),
       },
     ],
   },
