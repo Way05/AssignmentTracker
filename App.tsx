@@ -21,14 +21,9 @@ import ClassData from "./src/app-data/classesOBJ.js";
 import { toggleAnimation } from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-date-picker";
-import THEMES from "./src/app-data/themes.js";
+import { styles, currentTheme, changeTheme } from "./style";
+import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
-
-// device height
-const SCREEN_HEIGHT = Dimensions.get("screen").height;
-const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
-const WINDOW_HEIGHT = Dimensions.get("window").height;
-const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
 
 export default function App() {
   function getClasses(id: number, count: number) {
@@ -115,6 +110,15 @@ export default function App() {
 
   const [date, setDate] = useState(new Date());
 
+  const [themeValue, setTheme] = useState(null);
+  const [themeItems, setThemeItems] = useState(getThemes());
+  // function getThemes() {
+  //   var list = [];
+  //   for (let i = 0; i < Object.keys(themes).length; i++) {
+  //     list.push(Object.keys(themes)[i]);
+  //   }
+  // }
+
   return (
     //SAFEAREAVIEW is for IOS top bezel
     <SafeAreaView>
@@ -135,6 +139,15 @@ export default function App() {
               />
             )}
             style={styles.activityList}
+          />
+          <DropDownPicker
+            open={open}
+            value={themeValue}
+            items={themeItems}
+            setOpen={setOpen}
+            setValue={setTheme}
+            setItems={setThemeItems}
+            onClose={changeTheme(value)}
           />
         </View>
 
@@ -298,134 +311,3 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  topTextContainer: {
-    backgroundColor: "black",
-    paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT + 20 : 0,
-    paddingBottom: 20,
-
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  settingsIcon: {
-    fontSize: 30,
-  },
-  activityContainer: {
-    height: "90%",
-    width: "100%",
-    backgroundColor: "black",
-    textAlign: "center",
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  activityList: {
-    margin: 20,
-  },
-  buttonContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-
-    position: "absolute",
-    bottom: BOTTOM_NAV_BAR_HEIGHT + 10,
-    right: 10,
-  },
-  addButton: {
-    borderRadius: 10,
-
-    width: 80,
-    height: 80,
-
-    alignItems: "center",
-    justifyContent: "center",
-
-    backgroundColor: "black",
-  },
-  minorButton: {
-    borderRadius: 10,
-
-    height: 40,
-    width: 80,
-
-    marginBottom: 5,
-
-    alignItems: "center",
-    justifyContent: "center",
-
-    backgroundColor: "black",
-  },
-  buttonText: {
-    color: "white",
-
-    fontWeight: "bold",
-  },
-  modalParent: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  modalContent: {
-    borderRadius: 20,
-    width: 300,
-    height: 200,
-
-    alignItems: "center",
-    justifyContent: "center",
-
-    backgroundColor: "black",
-
-    //IOS DROP SHADOW
-    shadowColor: "black",
-    shadowOpacity: 0.2,
-    shadowOffset: {
-      width: -4,
-      height: 4,
-    },
-    shadowRadius: 3,
-    //ANDROID DROP SHADOW
-    elevation: 10,
-  },
-  modalSubContent: {
-    width: 200,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  datePickerModal: {
-    height: 500,
-  },
-  modalText: {},
-  pressables: {
-    width: 110,
-
-    position: "absolute",
-    bottom: 10,
-    right: 10,
-
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  pressable: {
-    borderRadius: 10,
-    width: 50,
-    height: 30,
-
-    alignItems: "center",
-    justifyContent: "center",
-
-    backgroundColor: "black",
-  },
-  dropdown: {
-    width: 200,
-
-    paddingHorizontal: 15,
-    margin: 7,
-    marginLeft: "50%",
-    transform: [{ translateX: -100 }],
-  },
-  datePicker: {
-    margin: 5,
-  },
-});

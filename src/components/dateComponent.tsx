@@ -77,7 +77,7 @@ const DateDisplay: React.FC<Props> = ({}) => {
 
 const styles = StyleSheet.create({
   text: {
-    color: "black",
+    color: "white",
     fontSize: 30,
     textAlign: "center",
   },

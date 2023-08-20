@@ -1,4 +1,4 @@
-export default THEMES = {
+export default themes = {
   DARK: {
     background: "black",
     modal: "black",
@@ -8,4 +8,5 @@ export default THEMES = {
     button: "white",
     text: "white",
   },
+  LIGHT: {},
 };
