@@ -1,5 +1,6 @@
-export default themes = {
-  DARK: {
+export default themes = [
+  {
+    name: "DARK",
     background: "black",
     modal: "black",
     shadow: "black",
@@ -8,5 +9,14 @@ export default themes = {
     button: "white",
     text: "white",
   },
-  LIGHT: {},
-};
+  {
+    name: "LIGHT",
+    background: "white",
+    modal: "white",
+    shadow: "black",
+    activities: "black",
+    tasks: "black",
+    button: "white",
+    text: "white",
+  },
+];

@@ -1,20 +1,11 @@
 import { StyleSheet, Dimensions, StatusBar, Platform } from "react-native";
 import themes from "./src/app-data/themes";
 
-export var currentTheme = themes.DARK;
+export var currentTheme = themes[0];
 
-type palette = {
-  background: string;
-  modal: string;
-  shadow: string;
-  activities: string;
-  tasks: string;
-  button: string;
-  text: string;
-};
-
-export function changeTheme(value: palette) {
-  currentTheme = value;
+export function changeTheme(value: number) {
+  currentTheme = themes[value];
+  console.log(value);
 }
 
 // device height

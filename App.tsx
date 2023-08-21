@@ -20,7 +20,7 @@ import ClassDisplay from "./src/components/classComponent";
 import ClassData from "./src/app-data/classesOBJ.js";
 import { toggleAnimation } from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
-import DatePicker from "react-native-date-picker";
+// import DatePicker from "react-native-date-picker";
 import { styles, currentTheme, changeTheme } from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
@@ -110,19 +110,28 @@ export default function App() {
 
   const [date, setDate] = useState(new Date());
 
-  const [themeValue, setTheme] = useState(null);
+  const [themeValue, setTheme] = useState(0);
   const [themeItems, setThemeItems] = useState(getThemes());
-  // function getThemes() {
-  //   var list = [];
-  //   for (let i = 0; i < Object.keys(themes).length; i++) {
-  //     list.push(Object.keys(themes)[i]);
-  //   }
-  // }
+  function getThemes() {
+    var list = [];
+    for (let i = 0; i < themes.length; i++) {
+      list.push({
+        label: themes[i].name,
+        value: i,
+      });
+    }
+    return list;
+  }
+
+  const [uniqueValue, changeUniqueValue] = useState(0);
+  function forceRemount() {
+    changeUniqueValue(uniqueValue + 1);
+  }
 
   return (
     //SAFEAREAVIEW is for IOS top bezel
-    <SafeAreaView>
-      <View>
+    <SafeAreaView key={uniqueValue}>
+      <View key={uniqueValue}>
         <View style={styles.topTextContainer}>
           <Icon name="menu" style={styles.settingsIcon} />
           <DateDisplay />
@@ -139,15 +148,6 @@ export default function App() {
               />
             )}
             style={styles.activityList}
-          />
-          <DropDownPicker
-            open={open}
-            value={themeValue}
-            items={themeItems}
-            setOpen={setOpen}
-            setValue={setTheme}
-            setItems={setThemeItems}
-            onClose={changeTheme(value)}
           />
         </View>
 
@@ -256,6 +256,19 @@ export default function App() {
                 setOpen={setOpen}
                 setValue={setValue}
                 setItems={setItems}
+                style={styles.dropdown}
+              />
+              <DropDownPicker
+                open={open}
+                value={themeValue}
+                items={themeItems}
+                setOpen={setOpen}
+                setValue={setTheme}
+                setItems={setThemeItems}
+                onChangeValue={() => {
+                  changeTheme(themeValue);
+                  forceRemount();
+                }}
                 style={styles.dropdown}
               />
               <TextInput
