@@ -1,10 +1,12 @@
-import { StyleSheet, Dimensions, StatusBar, Platform } from "react-native";
+import { Dimensions, StatusBar, Platform } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 import themes from "./src/app-data/themes";
 
 export var currentTheme = themes[0];
 
 export function changeTheme(value: number) {
   currentTheme = themes[value];
+  build();
   console.log(value);
 }
 
@@ -13,10 +15,23 @@ const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
+function build() {
+  EStyleSheet.build({
+    $theme: currentTheme.name,
+    $background: currentTheme.background,
+    $modal: currentTheme.modal,
+    $shadow: currentTheme.shadow,
+    $activities: currentTheme.activities,
+    $tasks: currentTheme.tasks,
+    $button: currentTheme.button,
+    $text: currentTheme.text,
+  });
+}
+build();
 
-export const styles = StyleSheet.create({
+export const styles = EStyleSheet.create({
   topTextContainer: {
-    backgroundColor: currentTheme.background,
+    backgroundColor: "$background",
     paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT + 20 : 0,
     paddingBottom: 20,
 
@@ -26,12 +41,12 @@ export const styles = StyleSheet.create({
   },
   settingsIcon: {
     fontSize: 30,
-    color: "white",
+    color: "$text",
   },
   activityContainer: {
     height: "90%",
     width: "100%",
-    backgroundColor: "black",
+    backgroundColor: "$background",
     textAlign: "center",
     justifyContent: "center",
     alignContent: "center",
@@ -56,7 +71,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    backgroundColor: "black",
+    backgroundColor: "$button",
   },
   minorButton: {
     borderRadius: 10,
@@ -69,10 +84,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    backgroundColor: "black",
+    backgroundColor: "$button",
   },
   buttonText: {
-    color: "white",
+    color: "$text",
 
     fontWeight: "bold",
   },
@@ -90,10 +105,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    backgroundColor: "black",
+    backgroundColor: "$background",
 
     //IOS DROP SHADOW
-    shadowColor: "black",
+    shadowColor: "$shadow",
     shadowOpacity: 0.2,
     shadowOffset: {
       width: -4,
@@ -131,7 +146,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    backgroundColor: "black",
+    backgroundColor: "$button",
   },
   dropdown: {
     width: 200,

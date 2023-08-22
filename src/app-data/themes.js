@@ -6,7 +6,7 @@ export default themes = [
     shadow: "black",
     activities: "black",
     tasks: "black",
-    button: "white",
+    button: "black",
     text: "white",
   },
   {
@@ -16,7 +16,7 @@ export default themes = [
     shadow: "black",
     activities: "black",
     tasks: "black",
-    button: "white",
+    button: "black",
     text: "white",
   },
 ];

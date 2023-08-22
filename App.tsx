@@ -21,7 +21,7 @@ import ClassData from "./src/app-data/classesOBJ.js";
 import { toggleAnimation } from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 // import DatePicker from "react-native-date-picker";
-import { styles, currentTheme, changeTheme } from "./style";
+import { styles, changeTheme } from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
 
