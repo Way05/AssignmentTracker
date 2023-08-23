@@ -8,6 +8,7 @@ import {
   LayoutAnimation,
 } from "react-native";
 import { toggleAnimation } from "../animations/toggleAnimation";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export type Props = {
   title: string;
@@ -51,7 +52,7 @@ const Accordion: React.FC<Props> = ({ title, content }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   accordionItem: {
     width: "80%",
 

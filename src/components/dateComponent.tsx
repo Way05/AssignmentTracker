@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { Text, StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export type Props = {};
 
@@ -75,9 +76,9 @@ const DateDisplay: React.FC<Props> = ({}) => {
   return <Text style={styles.text}>{displayCurrentTimeDate()}</Text>;
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   text: {
-    color: "white",
+    color: "$time",
     fontSize: 30,
     textAlign: "center",
   },
