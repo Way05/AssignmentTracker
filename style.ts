@@ -15,6 +15,7 @@ const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
+
 function build() {
   EStyleSheet.build({
     $theme: currentTheme.name,

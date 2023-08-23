@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   accordionItem: {
     width: "80%",
 
-    backgroundColor: "black",
+    backgroundColor: "$activities",
     borderRadius: 10,
     padding: 10,
     margin: 5,
@@ -74,13 +74,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleText: {
-    color: "white",
+    color: "$text",
 
     fontSize: 20,
     fontWeight: "bold",
   },
   bodyText: {
-    color: "white",
+    color: "$text",
 
     width: "100%",
   },
