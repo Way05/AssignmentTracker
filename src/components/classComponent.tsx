@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export type Props = {
   name: string;
@@ -18,7 +19,7 @@ const ClassDisplay: React.FC<Props> = ({ name, date }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   tHolder: {
     width: "100%",
     flexDirection: "row",
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
   },
   t: {
     width: "50%",
-    color: "white",
+    color: "$text",
     textAlign: "center",
   },
 });
