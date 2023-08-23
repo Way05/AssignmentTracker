@@ -19,6 +19,8 @@ const BOTTOM_NAV_BAR_HEIGHT = SCREEN_HEIGHT - WINDOW_HEIGHT + STATUS_BAR_HEIGHT;
 function build() {
   EStyleSheet.build({
     $theme: currentTheme.name,
+    $time: currentTheme.time,
+    $icon: currentTheme.icon,
     $background: currentTheme.background,
     $modal: currentTheme.modal,
     $shadow: currentTheme.shadow,
@@ -42,7 +44,7 @@ export const styles = EStyleSheet.create({
   },
   settingsIcon: {
     fontSize: 30,
-    color: "$text",
+    color: "$icon",
   },
   activityContainer: {
     height: "90%",
@@ -60,8 +62,8 @@ export const styles = EStyleSheet.create({
     justifyContent: "center",
 
     position: "absolute",
-    bottom: BOTTOM_NAV_BAR_HEIGHT + 10,
-    right: 10,
+    bottom: BOTTOM_NAV_BAR_HEIGHT + 37 + 5,
+    right: 5,
   },
   addButton: {
     borderRadius: 10,
