@@ -1,6 +1,8 @@
 export default themes = [
   {
     name: "DARK",
+    time: "white",
+    icon: "white",
     background: "black",
     modal: "black",
     shadow: "black",
@@ -11,6 +13,8 @@ export default themes = [
   },
   {
     name: "LIGHT",
+    time: "black",
+    icon: "black",
     background: "white",
     modal: "white",
     shadow: "black",
