@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { Text, StyleSheet } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-export type Props = {};
+type Props = {};
 
 const monthNames: { [key: number]: string } = {
   1: "January",
