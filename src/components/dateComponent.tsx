@@ -30,7 +30,7 @@ const dayNames: { [key: number]: string } = {
 
 const DateDisplay: React.FC<Props> = ({}) => {
   var month = new Date().getMonth() + 1;
-  var day = new Date().getUTCDate();
+  var day = new Date().getUTCDate() + 1;
   var dayUTC = new Date().getUTCDate();
 
   function returnDay() {
