@@ -2,9 +2,11 @@ import { Dimensions, StatusBar, Platform } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import themes from "./src/app-data/themes";
 
-export var currentTheme = themes[0];
+export { currentTheme, changeTheme, styles };
 
-export function changeTheme(value: number) {
+var currentTheme = themes[0];
+
+function changeTheme(value: number) {
   currentTheme = themes[value];
   build();
   console.log(value);
@@ -32,7 +34,7 @@ function build() {
 }
 build();
 
-export const styles = EStyleSheet.create({
+const styles = EStyleSheet.create({
   topTextContainer: {
     backgroundColor: "$background",
     paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT + 20 : 0,
