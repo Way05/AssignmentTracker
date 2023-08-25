@@ -129,7 +129,9 @@ export const styles = EStyleSheet.create({
   datePickerModal: {
     height: 500,
   },
-  modalText: {},
+  modalText: {
+    color: "$text",
+  },
   pressables: {
     width: 110,
 
@@ -150,6 +152,13 @@ export const styles = EStyleSheet.create({
     justifyContent: "center",
 
     backgroundColor: "$button",
+  },
+  textInput: {
+    color: "white",
+    backgroundColor: "$background",
+  },
+  dropdownPlaceholder: {
+    color: "$text",
   },
   dropdown: {
     width: 200,

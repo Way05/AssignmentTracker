@@ -205,6 +205,8 @@ export default function App() {
               onChangeText={setNameText}
               value={nameText}
               placeholder="name"
+              style={styles.textInput}
+              placeholderTextColor={"$text"}
             />
             <View style={styles.pressables}>
               <Pressable
@@ -275,6 +277,8 @@ export default function App() {
                 onChangeText={setNameText}
                 value={nameText}
                 placeholder="name"
+                style={styles.textInput}
+                placeholderTextColor={styles.dropdownPlaceholder}
               />
             </View>
 
