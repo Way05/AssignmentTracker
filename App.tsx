@@ -18,7 +18,7 @@ import Icon from "react-native-vector-icons/Feather.js";
 import Accordion from "./src/components/accordionComponent";
 import ClassDisplay from "./src/components/classComponent";
 import ClassData from "./src/app-data/classesOBJ.js";
-import { toggleAnimation } from "./src/animations/toggleAnimation.js";
+import toggleAnimation from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 // import DatePicker from "react-native-date-picker";
 import { styles, changeTheme } from "./style";

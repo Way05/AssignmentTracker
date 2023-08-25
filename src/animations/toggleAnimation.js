@@ -1,6 +1,6 @@
 import { LayoutAnimation } from "react-native";
 
-export const toggleAnimation = {
+const toggleAnimation = {
   duration: 200,
   update: {
     duration: 200,
@@ -13,3 +13,5 @@ export const toggleAnimation = {
     type: LayoutAnimation.Types.easeInEaseOut,
   },
 };
+
+export default toggleAnimation;

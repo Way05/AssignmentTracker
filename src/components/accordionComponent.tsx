@@ -7,7 +7,7 @@ import {
   Animated,
   LayoutAnimation,
 } from "react-native";
-import { toggleAnimation } from "../animations/toggleAnimation";
+import toggleAnimation from "../animations/toggleAnimation";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 export type Props = {
