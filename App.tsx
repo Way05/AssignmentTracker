@@ -15,11 +15,36 @@ import {
   Platform,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather.js";
+import DropDownPicker from "react-native-dropdown-picker";
+
+import {
+  hidden,
+  setHidden,
+  animStatus1,
+  animStatus2,
+  toggleButtons,
+  iconTransform,
+  buttonTransform,
+  buttonTransform2,
+} from "./src/animations/addButtonAnimations";
+
 import Accordion from "./src/components/accordionComponent";
 import ClassDisplay from "./src/components/classComponent";
+import {
+  activityModalVisible,
+  setActivityModalVisibility,
+  activityNameText,
+  setActivityNameText,
+  AddActivityModal,
+} from "./src/components/modalComponents/addActivityModal";
+import {
+  taskModalVisible,
+  setTaskModalVisibility,
+  taskNameText,
+  setTaskNameText,
+  AddTaskModal,
+} from "./src/components/modalComponents/addTaskModal";
 import ClassData from "./src/app-data/classesOBJ.js";
-import toggleAnimation from "./src/animations/toggleAnimation.js";
-import DropDownPicker from "react-native-dropdown-picker";
 // import DatePicker from "react-native-date-picker";
 import { styles, changeTheme } from "./style";
 import themes from "./src/app-data/themes";
@@ -57,72 +82,6 @@ export default function App() {
     );
   }
 
-  const [modal1Visible, setModal1Visibility] = useState(false);
-  const [nameText, setNameText] = useState("");
-
-  const [modal2Visible, setModal2Visibility] = useState(false);
-
-  const [hidden, setHidden] = useState(false);
-  const animStatus1 = useRef(new Animated.Value(0)).current;
-  const animStatus2 = useRef(new Animated.Value(0)).current;
-  const toggleButtons = () => {
-    const config = {
-      duration: 200,
-      toValue: hidden ? 0 : 1,
-      useNativeDriver: true,
-    };
-    const config2 = {
-      duration: 300,
-      toValue: hidden ? 0 : 1,
-      useNativeDriver: true,
-    };
-    Animated.timing(animStatus1, config).start();
-    Animated.timing(animStatus2, config2).start();
-    LayoutAnimation.configureNext(toggleAnimation);
-    setHidden(!hidden);
-  };
-  const iconTransform = animStatus1.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "225deg"],
-  });
-  const buttonTransform = animStatus1.interpolate({
-    inputRange: [0, 1],
-    outputRange: [100, 0],
-  });
-  const buttonTransform2 = animStatus2.interpolate({
-    inputRange: [0, 1],
-    outputRange: [100, 0],
-  });
-
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(0);
-  const [items, setItems] = useState(getItems());
-  function getItems() {
-    const classNames = [];
-    for (let i = 0; i < ClassData.length; i++) {
-      classNames.push({
-        label: ClassData[i].title,
-        value: ClassData[i].classID - 1,
-      });
-    }
-    return classNames;
-  }
-
-  const [date, setDate] = useState(new Date());
-
-  const [themeValue, setTheme] = useState(0);
-  const [themeItems, setThemeItems] = useState(getThemes());
-  function getThemes() {
-    var list = [];
-    for (let i = 0; i < themes.length; i++) {
-      list.push({
-        label: themes[i].name,
-        value: i,
-      });
-    }
-    return list;
-  }
-
   const [uniqueValue, changeUniqueValue] = useState(0);
   function forceRemount() {
     changeUniqueValue(uniqueValue + 1);
@@ -157,7 +116,7 @@ export default function App() {
           >
             <Pressable
               onPress={() => {
-                setModal1Visibility(true);
+                setActivityModalVisibility(true);
               }}
               style={styles.minorButton}
             >
@@ -169,7 +128,7 @@ export default function App() {
           >
             <Pressable
               onPress={() => {
-                setModal2Visibility(true);
+                setTaskModalVisibility(true);
               }}
               style={styles.minorButton}
             >
@@ -190,141 +149,9 @@ export default function App() {
         </View>
       </View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modal1Visible}
-        onRequestClose={() => {
-          setModal1Visibility(!modal1Visible);
-        }}
-      >
-        <View style={styles.modalParent}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Create New Activity</Text>
-            <TextInput
-              onChangeText={setNameText}
-              value={nameText}
-              placeholder="name"
-              style={styles.textInput}
-              placeholderTextColor={"$text"}
-            />
-            <View style={styles.pressables}>
-              <Pressable
-                onPress={() => {
-                  setModal1Visibility(!modal1Visible);
-                  var newClass = nameText;
-                  ClassData.push({
-                    classID: ClassData.length + 1,
-                    title: newClass,
-                    taskCount: 0,
-                    content: [],
-                  });
-                  setNameText("");
-                }}
-                style={styles.pressable}
-              >
-                <Text style={styles.buttonText}>save</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => {
-                  setModal1Visibility(!modal1Visible);
-                  setNameText("");
-                }}
-                style={styles.pressable}
-              >
-                <Text style={styles.buttonText}>close</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <AddActivityModal />
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modal2Visible}
-        onRequestClose={() => {
-          setModal2Visibility(!modal2Visible);
-        }}
-      >
-        <View style={styles.modalParent}>
-          <View style={[styles.modalContent, styles.datePickerModal]}>
-            <View style={styles.modalSubContent}>
-              <Text style={styles.modalText}>Add Task</Text>
-              <DropDownPicker
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                style={styles.dropdown}
-              />
-              <DropDownPicker
-                open={open}
-                value={themeValue}
-                items={themeItems}
-                setOpen={setOpen}
-                setValue={setTheme}
-                setItems={setThemeItems}
-                onChangeValue={() => {
-                  changeTheme(themeValue);
-                  forceRemount();
-                }}
-                style={styles.dropdown}
-              />
-              <TextInput
-                onChangeText={setNameText}
-                value={nameText}
-                placeholder="name"
-                style={styles.textInput}
-                placeholderTextColor={styles.dropdownPlaceholder}
-              />
-            </View>
-
-            {/* https://reactnative.dev/docs/datepickerios */}
-            {/* MUST RUN DATEPICKER ON DEV BUILD */}
-            {/* <DatePicker
-              date={date}
-              onDateChange={setDate}
-              style={styles.datePicker}
-            /> */}
-
-            <View style={styles.pressables}>
-              <Pressable
-                onPress={() => {
-                  setModal2Visibility(!modal2Visible);
-                  var activity: number = value;
-                  var newTask = nameText;
-                  ClassData[activity].content.push({
-                    assignmentName: newTask,
-                    dueDate: date,
-                  });
-                  ClassData[activity].taskCount++;
-                  setNameText("");
-                }}
-                style={
-                  value == null || nameText == ""
-                    ? { opacity: 0 }
-                    : styles.pressable
-                }
-                disabled={value == null || nameText == ""}
-              >
-                <Text style={styles.buttonText}>save</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => {
-                  setModal2Visibility(!modal2Visible);
-                  setNameText("");
-                }}
-                style={styles.pressable}
-              >
-                <Text style={styles.buttonText}>close</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <AddTaskModal />
     </SafeAreaView>
   );
 }
