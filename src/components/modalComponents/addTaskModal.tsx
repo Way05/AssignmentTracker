@@ -6,49 +6,43 @@ import { styles, changeTheme } from "../../../style";
 import ClassData from "../../app-data/classesOBJ";
 import themes from "../../app-data/themes";
 
-export {
-  taskModalVisible,
-  setTaskModalVisibility,
-  taskNameText,
-  setTaskNameText,
-  AddTaskModal,
-};
+export { AddTaskModal };
 
 type Props = {};
 
-const [taskModalVisible, setTaskModalVisibility] = useState(false);
-const [taskNameText, setTaskNameText] = useState("");
-
-const [open, setOpen] = useState(false);
-const [value, setValue] = useState(0);
-const [items, setItems] = useState(getItems());
-function getItems() {
-  const classNames = [];
-  for (let i = 0; i < ClassData.length; i++) {
-    classNames.push({
-      label: ClassData[i].title,
-      value: ClassData[i].classID - 1,
-    });
-  }
-  return classNames;
-}
-
-const [themeValue, setTheme] = useState(0);
-const [themeItems, setThemeItems] = useState(getThemes());
-function getThemes() {
-  var list = [];
-  for (let i = 0; i < themes.length; i++) {
-    list.push({
-      label: themes[i].name,
-      value: i,
-    });
-  }
-  return list;
-}
-
-const [date, setDate] = useState(new Date());
-
 const AddTaskModal: React.FC<Props> = ({}) => {
+  const [taskModalVisible, setTaskModalVisibility] = useState(false);
+  const [taskNameText, setTaskNameText] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(0);
+  const [items, setItems] = useState(getItems());
+  function getItems() {
+    const classNames = [];
+    for (let i = 0; i < ClassData.length; i++) {
+      classNames.push({
+        label: ClassData[i].title,
+        value: ClassData[i].classID - 1,
+      });
+    }
+    return classNames;
+  }
+
+  const [themeValue, setTheme] = useState(0);
+  const [themeItems, setThemeItems] = useState(getThemes());
+  function getThemes() {
+    var list = [];
+    for (let i = 0; i < themes.length; i++) {
+      list.push({
+        label: themes[i].name,
+        value: i,
+      });
+    }
+    return list;
+  }
+
+  const [date, setDate] = useState(new Date());
+
   return (
     <Modal
       animationType="slide"

@@ -17,33 +17,12 @@ import {
 import Icon from "react-native-vector-icons/Feather.js";
 import DropDownPicker from "react-native-dropdown-picker";
 
-import {
-  hidden,
-  setHidden,
-  animStatus1,
-  animStatus2,
-  toggleButtons,
-  iconTransform,
-  buttonTransform,
-  buttonTransform2,
-} from "./src/animations/addButtonAnimations";
+import toggleAnimation from "./src/animations/toggleAnimation";
 
 import Accordion from "./src/components/accordionComponent";
 import ClassDisplay from "./src/components/classComponent";
-import {
-  activityModalVisible,
-  setActivityModalVisibility,
-  activityNameText,
-  setActivityNameText,
-  AddActivityModal,
-} from "./src/components/modalComponents/addActivityModal";
-import {
-  taskModalVisible,
-  setTaskModalVisibility,
-  taskNameText,
-  setTaskNameText,
-  AddTaskModal,
-} from "./src/components/modalComponents/addTaskModal";
+import { AddActivityModal } from "./src/components/modalComponents/addActivityModal";
+import { AddTaskModal } from "./src/components/modalComponents/addTaskModal";
 import ClassData from "./src/app-data/classesOBJ.js";
 // import DatePicker from "react-native-date-picker";
 import { styles, changeTheme } from "./style";
@@ -86,6 +65,37 @@ export default function App() {
   function forceRemount() {
     changeUniqueValue(uniqueValue + 1);
   }
+  const [hidden, setHidden] = useState(false);
+  const animStatus1 = useRef(new Animated.Value(0)).current;
+  const animStatus2 = useRef(new Animated.Value(0)).current;
+  const toggleButtons = () => {
+    const config = {
+      duration: 200,
+      toValue: hidden ? 0 : 1,
+      useNativeDriver: true,
+    };
+    const config2 = {
+      duration: 300,
+      toValue: hidden ? 0 : 1,
+      useNativeDriver: true,
+    };
+    Animated.timing(animStatus1, config).start();
+    Animated.timing(animStatus2, config2).start();
+    LayoutAnimation.configureNext(toggleAnimation);
+    setHidden(!hidden);
+  };
+  const iconTransform = animStatus1.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "225deg"],
+  });
+  const buttonTransform = animStatus1.interpolate({
+    inputRange: [0, 1],
+    outputRange: [100, 0],
+  });
+  const buttonTransform2 = animStatus2.interpolate({
+    inputRange: [0, 1],
+    outputRange: [100, 0],
+  });
 
   return (
     //SAFEAREAVIEW is for IOS top bezel
@@ -116,7 +126,7 @@ export default function App() {
           >
             <Pressable
               onPress={() => {
-                setActivityModalVisibility(true);
+                <AddActivityModal />;
               }}
               style={styles.minorButton}
             >
@@ -126,12 +136,7 @@ export default function App() {
           <Animated.View
             style={{ transform: [{ translateX: buttonTransform2 }] }}
           >
-            <Pressable
-              onPress={() => {
-                setTaskModalVisibility(true);
-              }}
-              style={styles.minorButton}
-            >
+            <Pressable onPress={() => {}} style={styles.minorButton}>
               <Text style={styles.buttonText}>Task</Text>
             </Pressable>
           </Animated.View>
@@ -148,10 +153,6 @@ export default function App() {
           </Pressable>
         </View>
       </View>
-
-      <AddActivityModal />
-
-      <AddTaskModal />
     </SafeAreaView>
   );
 }

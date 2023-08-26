@@ -4,20 +4,13 @@ import { Modal, View, Text, TextInput, Pressable } from "react-native";
 import { styles } from "../../../style";
 import ClassData from "../../app-data/classesOBJ.js";
 
-export {
-  activityModalVisible,
-  setActivityModalVisibility,
-  activityNameText,
-  setActivityNameText,
-  AddActivityModal,
-};
+export { AddActivityModal };
 
 type Props = {};
 
-const [activityModalVisible, setActivityModalVisibility] = useState(false);
-const [activityNameText, setActivityNameText] = useState("");
-
 const AddActivityModal: React.FC<Props> = ({}) => {
+  const [activityModalVisible, setActivityModalVisibility] = useState(false);
+  const [activityNameText, setActivityNameText] = useState("");
   return (
     <Modal
       animationType="slide"
