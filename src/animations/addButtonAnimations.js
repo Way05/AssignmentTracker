@@ -1,5 +1,5 @@
 import { useState } from "react";
-import toggleAnimation from "./src/animations/toggleAnimation.js";
+import toggleAnimation from "./toggleAnimation.js";
 
 export {
   hidden,
