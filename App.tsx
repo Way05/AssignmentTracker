@@ -24,6 +24,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { styles, changeTheme } from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
+// import DrawerComponent from "./src/components/sideDrawer";
 
 export default function App() {
   function getClasses(id: number, count: number) {
@@ -131,6 +132,8 @@ export default function App() {
   return (
     //SAFEAREAVIEW is for IOS top bezel
     <SafeAreaView key={uniqueValue}>
+      {/* <DrawerComponent /> */}
+
       <View key={uniqueValue}>
         <View style={styles.topTextContainer}>
           <Icon name="menu" style={styles.settingsIcon} />
