@@ -1,5 +1,6 @@
 export default themes = [
   {
+    id: 0,
     name: "DARK",
     time: "white",
     icon: "white",
@@ -12,6 +13,7 @@ export default themes = [
     text: "white",
   },
   {
+    id: 1,
     name: "LIGHT",
     time: "black",
     icon: "black",
@@ -21,6 +23,6 @@ export default themes = [
     activities: "black",
     tasks: "black",
     button: "black",
-    text: "white",
+    text: "black",
   },
 ];
