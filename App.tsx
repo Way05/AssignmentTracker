@@ -24,6 +24,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { styles, changeTheme, settingsStyles, RippleConfig } from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
+import Ree from "./src/components/selectableThemeFlatList";
 
 export default function App() {
   function getClasses(id: number, count: number) {
@@ -218,6 +219,7 @@ export default function App() {
             >
               <Text style={settingsStyles.settingsText}>Themes</Text>
             </Pressable>
+            <Ree />
             {/* <DropDownPicker
               open={open}
               value={themeValue}
