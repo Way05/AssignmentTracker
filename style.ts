@@ -2,9 +2,11 @@ import { Dimensions, StatusBar, Platform } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import themes from "./src/app-data/themes";
 
-export var currentTheme = themes[0];
+export { currentTheme, changeTheme, styles, settingsStyles, RippleConfig };
 
-export function changeTheme(value: number) {
+var currentTheme = themes[0];
+
+function changeTheme(value: number) {
   currentTheme = themes[value];
   build();
   console.log(value);
@@ -32,7 +34,7 @@ function build() {
 }
 build();
 
-export const styles = EStyleSheet.create({
+const styles = EStyleSheet.create({
   topTextContainer: {
     backgroundColor: "$background",
     paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT + 20 : 0,
@@ -62,7 +64,7 @@ export const styles = EStyleSheet.create({
     justifyContent: "center",
 
     position: "absolute",
-    bottom: BOTTOM_NAV_BAR_HEIGHT + 37 + 5,
+    bottom: BOTTOM_NAV_BAR_HEIGHT + 40,
     right: 5,
   },
   addButton: {
@@ -172,3 +174,41 @@ export const styles = EStyleSheet.create({
     margin: 5,
   },
 });
+
+const settingsStyles = EStyleSheet.create({
+  settingsContainer: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "$background",
+  },
+  settingsTitleContainer: {
+    height: "20%",
+
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  settingsTitle: {
+    color: "$text",
+    fontSize: 40,
+  },
+  settingsText: {
+    color: "$text",
+    fontSize: 20,
+  },
+  rippleButton: {
+    padding: 20,
+  },
+  settingsFootContainer: {
+    width: "100%",
+    position: "absolute",
+    color: "$text",
+    bottom: 0,
+  },
+});
+
+const RippleConfig = {
+  color: "grey",
+  borderless: false,
+  radius: 200,
+  foreground: true,
+};

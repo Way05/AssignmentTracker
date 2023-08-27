@@ -21,7 +21,7 @@ import ClassData from "./src/app-data/classesOBJ.js";
 import toggleAnimation from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 // import DatePicker from "react-native-date-picker";
-import { styles, changeTheme } from "./style";
+import { styles, changeTheme, settingsStyles, RippleConfig } from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
 
@@ -57,11 +57,14 @@ export default function App() {
     );
   }
 
-  const [modal1Visible, setModal1Visibility] = useState(false);
+  const [activityModalVisible, setActivityModalVisibility] = useState(false);
+  const [taskModalVisible, setTaskModalVisibility] = useState(false);
+  //only one text input will be open at a time so this is acceptable
   const [nameText, setNameText] = useState("");
 
-  const [modal2Visible, setModal2Visibility] = useState(false);
+  const [settingsModalVisible, setSettingsModalVisibility] = useState(false);
 
+  //hidden state for add buttons
   const [hidden, setHidden] = useState(false);
   const animStatus1 = useRef(new Animated.Value(0)).current;
   const animStatus2 = useRef(new Animated.Value(0)).current;
@@ -133,7 +136,13 @@ export default function App() {
     <SafeAreaView key={uniqueValue}>
       <View key={uniqueValue}>
         <View style={styles.topTextContainer}>
-          <Icon name="menu" style={styles.settingsIcon} />
+          <Pressable
+            onPress={() => {
+              setSettingsModalVisibility(true);
+            }}
+          >
+            <Icon name="menu" style={styles.settingsIcon} />
+          </Pressable>
           <DateDisplay />
         </View>
 
@@ -157,7 +166,7 @@ export default function App() {
           >
             <Pressable
               onPress={() => {
-                setModal1Visibility(true);
+                setActivityModalVisibility(true);
               }}
               style={styles.minorButton}
             >
@@ -169,7 +178,7 @@ export default function App() {
           >
             <Pressable
               onPress={() => {
-                setModal2Visibility(true);
+                setTaskModalVisibility(true);
               }}
               style={styles.minorButton}
             >
@@ -192,10 +201,66 @@ export default function App() {
 
       <Modal
         animationType="slide"
-        transparent={true}
-        visible={modal1Visible}
+        transparent={false}
+        visible={settingsModalVisible}
         onRequestClose={() => {
-          setModal1Visibility(!modal1Visible);
+          setSettingsModalVisibility(!settingsModalVisible);
+        }}
+      >
+        <View style={settingsStyles.settingsContainer}>
+          <View style={settingsStyles.settingsTitleContainer}>
+            <Text style={settingsStyles.settingsTitle}>Menu</Text>
+          </View>
+          <View style={settingsStyles.settingsOptionsContainer}>
+            <Pressable
+              style={settingsStyles.rippleButton}
+              android_ripple={RippleConfig}
+            >
+              <Text style={settingsStyles.settingsText}>Themes</Text>
+            </Pressable>
+            {/* <DropDownPicker
+              open={open}
+              value={themeValue}
+              items={themeItems}
+              setOpen={setOpen}
+              setValue={setTheme}
+              setItems={setThemeItems}
+              onChangeValue={() => {
+                changeTheme(themeValue);
+                forceRemount();
+              }}
+              style={settingsStyles.themeDropdown}
+            /> */}
+            <Pressable
+              style={settingsStyles.rippleButton}
+              android_ripple={RippleConfig}
+            >
+              <Text style={settingsStyles.settingsText}>Notifications</Text>
+            </Pressable>
+          </View>
+          <View style={settingsStyles.settingsFootContainer}>
+            <Pressable
+              style={settingsStyles.rippleButton}
+              android_ripple={RippleConfig}
+            >
+              <Text style={settingsStyles.settingsText}>About</Text>
+            </Pressable>
+            <Pressable
+              style={settingsStyles.rippleButton}
+              android_ripple={RippleConfig}
+            >
+              <Text style={settingsStyles.settingsText}>V // 1.0.0</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={activityModalVisible}
+        onRequestClose={() => {
+          setActivityModalVisibility(!activityModalVisible);
         }}
       >
         <View style={styles.modalParent}>
@@ -211,7 +276,7 @@ export default function App() {
             <View style={styles.pressables}>
               <Pressable
                 onPress={() => {
-                  setModal1Visibility(!modal1Visible);
+                  setActivityModalVisibility(!activityModalVisible);
                   var newClass = nameText;
                   ClassData.push({
                     classID: ClassData.length + 1,
@@ -227,7 +292,7 @@ export default function App() {
               </Pressable>
               <Pressable
                 onPress={() => {
-                  setModal1Visibility(!modal1Visible);
+                  setActivityModalVisibility(!activityModalVisible);
                   setNameText("");
                 }}
                 style={styles.pressable}
@@ -242,9 +307,9 @@ export default function App() {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modal2Visible}
+        visible={taskModalVisible}
         onRequestClose={() => {
-          setModal2Visibility(!modal2Visible);
+          setTaskModalVisibility(!taskModalVisible);
         }}
       >
         <View style={styles.modalParent}>
@@ -258,19 +323,6 @@ export default function App() {
                 setOpen={setOpen}
                 setValue={setValue}
                 setItems={setItems}
-                style={styles.dropdown}
-              />
-              <DropDownPicker
-                open={open}
-                value={themeValue}
-                items={themeItems}
-                setOpen={setOpen}
-                setValue={setTheme}
-                setItems={setThemeItems}
-                onChangeValue={() => {
-                  changeTheme(themeValue);
-                  forceRemount();
-                }}
                 style={styles.dropdown}
               />
               <TextInput
@@ -289,11 +341,10 @@ export default function App() {
               onDateChange={setDate}
               style={styles.datePicker}
             /> */}
-
             <View style={styles.pressables}>
               <Pressable
                 onPress={() => {
-                  setModal2Visibility(!modal2Visible);
+                  setTaskModalVisibility(!taskModalVisible);
                   var activity: number = value;
                   var newTask = nameText;
                   ClassData[activity].content.push({
@@ -314,7 +365,7 @@ export default function App() {
               </Pressable>
               <Pressable
                 onPress={() => {
-                  setModal2Visibility(!modal2Visible);
+                  setTaskModalVisibility(!taskModalVisible);
                   setNameText("");
                 }}
                 style={styles.pressable}
