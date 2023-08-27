@@ -38,9 +38,8 @@ const Ree = () => {
   const [selectedId, setSelectedId] = useState<string>();
 
   const renderItem = ({ item }: { item: data }) => {
-    const backgroundColor =
-      item.name === selectedId ? item.background : item.tasks;
-    const color = item.name === selectedId ? item.tasks : item.background;
+    const backgroundColor = item.name === selectedId ? "white" : "black";
+    const color = item.name === selectedId ? "black" : "white";
     return (
       <Item
         item={item}
