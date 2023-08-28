@@ -48,7 +48,7 @@ const Ree = ({ mount }: Prop2) => {
 
   const renderItem = ({ item }: { item: data }) => {
     // const backgroundColor = item.name === selectedId ? "white" : "black";
-    const indicator = item.name === selectedId ? "_" : "";
+    const indicator = item.name === selectedId ? "     _" : "     ";
     // const color = item.name === selectedId ? "black" : "white";
     return (
       <Item
