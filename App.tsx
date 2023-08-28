@@ -27,6 +27,7 @@ import {
   settingsStyles,
   RippleConfig,
   currentTheme,
+  textInputPlaceholderColor,
 } from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
@@ -280,7 +281,7 @@ export default function App() {
               value={nameText}
               placeholder="name"
               style={styles.textInput}
-              placeholderTextColor={"white"}
+              placeholderTextColor={textInputPlaceholderColor}
             />
             <View style={styles.pressables}>
               <Pressable
@@ -339,7 +340,7 @@ export default function App() {
                 value={nameText}
                 placeholder="name"
                 style={styles.textInput}
-                placeholderTextColor={styles.textInput}
+                placeholderTextColor={textInputPlaceholderColor}
               />
             </View>
 
@@ -350,6 +351,7 @@ export default function App() {
               onDateChange={setDate}
               style={styles.datePicker}
             /> */}
+
             <View style={styles.pressables}>
               <Pressable
                 onPress={() => {
