@@ -66,10 +66,10 @@ export default function App() {
 
   const [activityModalVisible, setActivityModalVisibility] = useState(false);
   const [taskModalVisible, setTaskModalVisibility] = useState(false);
+  const [settingsModalVisible, setSettingsModalVisibility] = useState(false);
+
   //only one text input will be open at a time so this is acceptable
   const [nameText, setNameText] = useState("");
-
-  const [settingsModalVisible, setSettingsModalVisibility] = useState(false);
 
   //hidden state for add buttons
   const [hidden, setHidden] = useState(false);
@@ -280,7 +280,7 @@ export default function App() {
               value={nameText}
               placeholder="name"
               style={styles.textInput}
-              placeholderTextColor={"$text"}
+              placeholderTextColor={"white"}
             />
             <View style={styles.pressables}>
               <Pressable
@@ -339,7 +339,7 @@ export default function App() {
                 value={nameText}
                 placeholder="name"
                 style={styles.textInput}
-                placeholderTextColor={styles.dropdownPlaceholder}
+                placeholderTextColor={styles.textInput}
               />
             </View>
 
