@@ -2,16 +2,24 @@ import { Dimensions, StatusBar, Platform } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import themes from "./src/app-data/themes";
 
-export { currentTheme, changeTheme, styles, settingsStyles, RippleConfig };
+export {
+  currentTheme,
+  changeTheme,
+  styles,
+  settingsStyles,
+  RippleConfig,
+  textInputPlaceholderColor,
+};
 
 var currentTheme = themes[0];
-
 function changeTheme(value: number) {
   currentTheme = themes[value];
   build();
   buildRipple();
+  buildPlaceholderText();
   console.log(value);
 }
+
 var RippleConfig = {
   color: currentTheme.accent,
   borderless: false,
@@ -25,6 +33,11 @@ function buildRipple() {
     radius: 200,
     foreground: false,
   };
+}
+
+var textInputPlaceholderColor = currentTheme.text;
+function buildPlaceholderText() {
+  textInputPlaceholderColor = currentTheme.text;
 }
 
 // device height
@@ -51,6 +64,7 @@ function build() {
 }
 build();
 buildRipple();
+buildPlaceholderText();
 
 const styles = EStyleSheet.create({
   topTextContainer: {
@@ -176,14 +190,8 @@ const styles = EStyleSheet.create({
   textInput: {
     backgroundColor: "$background",
   },
-  dropdownPlaceholder: {
-    color: "$text",
-  },
   dropdown: {
     width: 200,
-
-    backgroundColor: "$background",
-    color: "white",
 
     paddingHorizontal: 15,
     margin: 7,
@@ -217,9 +225,6 @@ const settingsStyles = EStyleSheet.create({
   },
   rippleButton: {
     padding: 20,
-  },
-  flatlist: {
-    paddingLeft: 30,
   },
   settingsFootContainer: {
     width: "100%",
