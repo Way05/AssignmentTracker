@@ -11,6 +11,7 @@ export default themes = [
     tasks: "black",
     button: "black",
     text: "white",
+    settingsText: "white",
   },
   {
     id: 1,
@@ -23,6 +24,7 @@ export default themes = [
     activities: "black",
     tasks: "black",
     button: "black",
-    text: "black",
+    text: "white",
+    settingsText: "black",
   },
 ];
