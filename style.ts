@@ -9,7 +9,22 @@ var currentTheme = themes[0];
 function changeTheme(value: number) {
   currentTheme = themes[value];
   build();
+  buildRipple();
   console.log(value);
+}
+var RippleConfig = {
+  color: currentTheme.accent,
+  borderless: false,
+  radius: 200,
+  foreground: false,
+};
+function buildRipple() {
+  RippleConfig = {
+    color: currentTheme.accent,
+    borderless: false,
+    radius: 200,
+    foreground: false,
+  };
 }
 
 // device height
@@ -31,9 +46,11 @@ function build() {
     $button: currentTheme.button,
     $text: currentTheme.text,
     $settingsText: currentTheme.settingsText,
+    $accent: currentTheme.accent,
   });
 }
 build();
+buildRipple();
 
 const styles = EStyleSheet.create({
   topTextContainer: {
@@ -157,7 +174,6 @@ const styles = EStyleSheet.create({
     backgroundColor: "$button",
   },
   textInput: {
-    color: "white",
     backgroundColor: "$background",
   },
   dropdownPlaceholder: {
@@ -165,6 +181,9 @@ const styles = EStyleSheet.create({
   },
   dropdown: {
     width: 200,
+
+    backgroundColor: "$background",
+    color: "white",
 
     paddingHorizontal: 15,
     margin: 7,
@@ -209,10 +228,3 @@ const settingsStyles = EStyleSheet.create({
     bottom: 0,
   },
 });
-
-const RippleConfig = {
-  color: "grey",
-  borderless: false,
-  radius: 200,
-  foreground: true,
-};

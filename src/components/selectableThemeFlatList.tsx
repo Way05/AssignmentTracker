@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { FlatList, Text, Pressable } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import themes from "../app-data/themes";
-import { changeTheme, currentTheme, settingsStyles } from "../../style";
+import {
+  RippleConfig,
+  changeTheme,
+  currentTheme,
+  settingsStyles,
+} from "../../style";
 
 type data = {
   id: number;
@@ -29,7 +34,11 @@ type Prop2 = {
 };
 
 const Item = ({ item, onPress, indicator }: Props) => (
-  <Pressable onPress={onPress} style={[settingsStyles.rippleButton]}>
+  <Pressable
+    onPress={onPress}
+    style={[settingsStyles.rippleButton]}
+    android_ripple={RippleConfig}
+  >
     <Text style={[settingsStyles.settingsText]}>{indicator + item.name}</Text>
   </Pressable>
 );
