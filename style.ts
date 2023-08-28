@@ -30,6 +30,7 @@ function build() {
     $tasks: currentTheme.tasks,
     $button: currentTheme.button,
     $text: currentTheme.text,
+    $settingsText: currentTheme.settingsText,
   });
 }
 build();
@@ -188,15 +189,18 @@ const settingsStyles = EStyleSheet.create({
     justifyContent: "center",
   },
   settingsTitle: {
-    color: "$text",
+    color: "$settingsText",
     fontSize: 40,
   },
   settingsText: {
-    color: "$text",
+    color: "$settingsText",
     fontSize: 20,
   },
   rippleButton: {
     padding: 20,
+  },
+  flatlist: {
+    paddingLeft: 30,
   },
   settingsFootContainer: {
     width: "100%",
