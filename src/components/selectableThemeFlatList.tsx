@@ -24,6 +24,9 @@ type Props = {
   onPress: () => void;
   indicator: string;
 };
+type Prop2 = {
+  mount: () => void;
+};
 
 const Item = ({ item, onPress, indicator }: Props) => (
   <Pressable onPress={onPress} style={[settingsStyles.rippleButton]}>
@@ -31,12 +34,12 @@ const Item = ({ item, onPress, indicator }: Props) => (
   </Pressable>
 );
 
-const Ree = () => {
+const Ree = ({ mount }: Prop2) => {
   const [selectedId, setSelectedId] = useState(currentTheme.name);
 
   const renderItem = ({ item }: { item: data }) => {
     // const backgroundColor = item.name === selectedId ? "white" : "black";
-    const indicator = item.name === selectedId ? ">  " : "";
+    const indicator = item.name === selectedId ? "_" : "";
     // const color = item.name === selectedId ? "black" : "white";
     return (
       <Item
@@ -44,6 +47,7 @@ const Ree = () => {
         onPress={() => {
           setSelectedId(item.name);
           changeTheme(item.id);
+          mount();
         }}
         indicator={indicator}
       />

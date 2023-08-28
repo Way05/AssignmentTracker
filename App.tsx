@@ -226,7 +226,7 @@ export default function App() {
             >
               <Text style={settingsStyles.settingsText}>Themes</Text>
             </Pressable>
-            <Ree />
+            <Ree mount={forceRemount} />
             {/* <DropDownPicker
               open={open}
               value={themeValue}
@@ -257,7 +257,6 @@ export default function App() {
             <Pressable
               style={settingsStyles.rippleButton}
               android_ripple={RippleConfig}
-              onPress={forceRemount}
             >
               <Text style={settingsStyles.settingsText}>V // 1.0.0</Text>
             </Pressable>
