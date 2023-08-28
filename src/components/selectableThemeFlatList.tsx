@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FlatList, Text, Pressable } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import themes from "../app-data/themes";
-import { changeTheme, settingsStyles } from "../../style";
+import { changeTheme, currentTheme, settingsStyles } from "../../style";
 
 type data = {
   id: number;
@@ -16,30 +16,28 @@ type data = {
   tasks: string;
   button: string;
   text: string;
+  settingsText: string;
 };
 
 type Props = {
   item: data;
   onPress: () => void;
-  backgroundColor: string;
-  color: string;
+  indicator: string;
 };
 
-const Item = ({ item, onPress, backgroundColor, color }: Props) => (
-  <Pressable
-    onPress={onPress}
-    style={[settingsStyles.rippleButton, { backgroundColor }]}
-  >
-    <Text style={[settingsStyles.settingsText, { color }]}>{item.name}</Text>
+const Item = ({ item, onPress, indicator }: Props) => (
+  <Pressable onPress={onPress} style={[settingsStyles.rippleButton]}>
+    <Text style={[settingsStyles.settingsText]}>{indicator + item.name}</Text>
   </Pressable>
 );
 
 const Ree = () => {
-  const [selectedId, setSelectedId] = useState<string>();
+  const [selectedId, setSelectedId] = useState(currentTheme.name);
 
   const renderItem = ({ item }: { item: data }) => {
-    const backgroundColor = item.name === selectedId ? "white" : "black";
-    const color = item.name === selectedId ? "black" : "white";
+    // const backgroundColor = item.name === selectedId ? "white" : "black";
+    const indicator = item.name === selectedId ? ">  " : "";
+    // const color = item.name === selectedId ? "black" : "white";
     return (
       <Item
         item={item}
@@ -47,8 +45,7 @@ const Ree = () => {
           setSelectedId(item.name);
           changeTheme(item.id);
         }}
-        backgroundColor={backgroundColor}
-        color={color}
+        indicator={indicator}
       />
     );
   };
@@ -57,6 +54,7 @@ const Ree = () => {
       data={themes}
       renderItem={renderItem}
       keyExtractor={(item) => item.name}
+      style={settingsStyles.flatlist}
     />
   );
 };
