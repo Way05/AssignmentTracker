@@ -21,7 +21,13 @@ import ClassData from "./src/app-data/classesOBJ.js";
 import toggleAnimation from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 // import DatePicker from "react-native-date-picker";
-import { styles, changeTheme, settingsStyles, RippleConfig } from "./style";
+import {
+  styles,
+  changeTheme,
+  settingsStyles,
+  RippleConfig,
+  currentTheme,
+} from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
 import Ree from "./src/components/selectableThemeFlatList";
@@ -127,15 +133,15 @@ export default function App() {
     return list;
   }
 
-  const [uniqueValue, changeUniqueValue] = useState(0);
+  const [uniqueValue, changeUniqueValue] = useState(currentTheme.id);
   function forceRemount() {
     changeUniqueValue(uniqueValue + 1);
   }
 
   return (
     //SAFEAREAVIEW is for IOS top bezel
-    <SafeAreaView key={uniqueValue}>
-      <View key={uniqueValue}>
+    <SafeAreaView>
+      <View>
         <View style={styles.topTextContainer}>
           <Pressable
             onPress={() => {
@@ -207,6 +213,7 @@ export default function App() {
         onRequestClose={() => {
           setSettingsModalVisibility(!settingsModalVisible);
         }}
+        key={uniqueValue}
       >
         <View style={settingsStyles.settingsContainer}>
           <View style={settingsStyles.settingsTitleContainer}>
@@ -250,6 +257,7 @@ export default function App() {
             <Pressable
               style={settingsStyles.rippleButton}
               android_ripple={RippleConfig}
+              onPress={forceRemount}
             >
               <Text style={settingsStyles.settingsText}>V // 1.0.0</Text>
             </Pressable>
