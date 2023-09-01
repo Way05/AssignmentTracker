@@ -2,7 +2,7 @@ import ClassData from "./classesOBJ";
 
 var RNFS = require("react-native-fs");
 
-var path = RNFS.DocumentDirectoryPath + "src/app-data/text-data";
+var path = RNFS.DocumentDirectoryPath + "./text-data/";
 var classesTxt = "classes.txt";
 var themesTxt = "themes.txt";
 
