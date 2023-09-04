@@ -67,9 +67,12 @@ buildRipple();
 buildPlaceholderText();
 
 const styles = EStyleSheet.create({
+  iosSafeArea: {
+    backgroundColor: "$background",
+  },
   topTextContainer: {
     backgroundColor: "$background",
-    paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT + 20 : 0,
+    paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT + 20 : 20,
     paddingBottom: 20,
 
     flexDirection: "row",
@@ -213,12 +216,14 @@ const settingsStyles = EStyleSheet.create({
     height: "20%",
 
     alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "left",
   },
   settingsTitle: {
     color: "$settingsText",
     fontSize: 40,
   },
+  backButton: { color: "$settingsText" },
   settingsText: {
     color: "$settingsText",
     fontSize: 20,
