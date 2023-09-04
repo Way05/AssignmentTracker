@@ -141,7 +141,7 @@ export default function App() {
 
   return (
     //SAFEAREAVIEW is for IOS top bezel
-    <SafeAreaView>
+    <SafeAreaView style={styles.iosSafeArea}>
       <View>
         <View style={styles.topTextContainer}>
           <Pressable
@@ -187,6 +187,7 @@ export default function App() {
             <Pressable
               onPress={() => {
                 setTaskModalVisibility(true);
+                setItems(getItems());
               }}
               style={styles.minorButton}
             >
@@ -218,6 +219,13 @@ export default function App() {
       >
         <View style={settingsStyles.settingsContainer}>
           <View style={settingsStyles.settingsTitleContainer}>
+            <Pressable
+              onPress={() => {
+                setSettingsModalVisibility(false);
+              }}
+            >
+              <Text style={settingsStyles.backButton}>Back</Text>
+            </Pressable>
             <Text style={settingsStyles.settingsTitle}>Menu</Text>
           </View>
           <View style={settingsStyles.settingsOptionsContainer}>
