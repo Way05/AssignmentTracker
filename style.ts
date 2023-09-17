@@ -5,6 +5,7 @@ import themes from "./src/app-data/themes";
 export {
   currentTheme,
   changeTheme,
+  getThemesForDropdown,
   styles,
   settingsStyles,
   RippleConfig,
@@ -12,6 +13,16 @@ export {
 };
 
 var currentTheme = themes[0];
+function getThemesForDropdown() {
+  var list = [];
+  for (let i = 0; i < themes.length; i++) {
+    list.push({
+      label: themes[i].name,
+      value: i,
+    });
+  }
+  return list;
+}
 function changeTheme(value: number) {
   currentTheme = themes[value];
   build();
@@ -72,19 +83,26 @@ const styles = EStyleSheet.create({
   },
   topTextContainer: {
     backgroundColor: "$background",
-    paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT + 20 : 20,
+    paddingTop: Platform.OS === "android" ? STATUS_BAR_HEIGHT : 20,
     paddingBottom: 20,
 
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
+
+    height: "20%",
   },
   settingsIcon: {
     fontSize: 30,
     color: "$icon",
   },
+  menuButton: {
+    position: "absolute",
+    left: 20,
+    top: 110,
+  },
   activityContainer: {
-    height: "90%",
+    height: "80%",
     width: "100%",
     backgroundColor: "$background",
     textAlign: "center",
@@ -99,7 +117,7 @@ const styles = EStyleSheet.create({
     justifyContent: "center",
 
     position: "absolute",
-    bottom: BOTTOM_NAV_BAR_HEIGHT + 40,
+    bottom: 5,
     right: 5,
   },
   addButton: {
@@ -192,6 +210,7 @@ const styles = EStyleSheet.create({
   },
   textInput: {
     backgroundColor: "$background",
+    color: "$text",
   },
   dropdown: {
     width: 200,
