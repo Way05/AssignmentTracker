@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 export type Props = {};
@@ -30,7 +30,7 @@ const dayNames: { [key: number]: string } = {
 
 const DateDisplay: React.FC<Props> = ({}) => {
   var month = new Date().getMonth() + 1;
-  var day = new Date().getUTCDate() + 1;
+  var day = new Date().getUTCDate();
   var dayUTC = new Date().getUTCDate();
 
   function returnDay() {
@@ -64,7 +64,7 @@ const DateDisplay: React.FC<Props> = ({}) => {
     const [currentDate, setCurrentDate] = useState("");
 
     const getDate = useCallback(() => {
-      setCurrentDate(`${returnDay()}, ${returnMonth()} ${dayUTC}`);
+      setCurrentDate(`${returnMonth()} ${dayUTC}`);
     }, []);
     useEffect(() => {
       const intervalID = setInterval(getDate, 1000);
