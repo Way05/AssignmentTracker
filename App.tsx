@@ -208,6 +208,7 @@ export default function App() {
         </View>
       </View>
 
+      {/* SETTINGS-MODAL */}
       <Modal
         animationType="slide"
         transparent={false}
@@ -273,6 +274,7 @@ export default function App() {
         </View>
       </Modal>
 
+      {/* ACTIVITY-MODAL */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -322,6 +324,7 @@ export default function App() {
         </View>
       </Modal>
 
+      {/* TASK-MODAL */}
       <Modal
         animationType="slide"
         transparent={true}
