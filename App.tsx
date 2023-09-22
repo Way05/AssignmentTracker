@@ -17,7 +17,11 @@ import {
 import Icon from "react-native-vector-icons/Feather.js";
 import Accordion from "./src/components/accordionComponent";
 import ClassDisplay from "./src/components/classComponent";
-import ClassData from "./src/app-data/classesOBJ.js";
+import {
+  ClassData,
+  getClasses,
+  getClassesForDropdown,
+} from "./src/app-data/classesOBJ";
 import toggleAnimation from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
 // import DatePicker from "react-native-date-picker";
@@ -28,36 +32,17 @@ import {
   RippleConfig,
   currentTheme,
   textInputPlaceholderColor,
+  getThemesForDropdown,
 } from "./style";
 import themes from "./src/app-data/themes";
 import DateDisplay from "./src/components/dateComponent";
 import Ree from "./src/components/selectableThemeFlatList";
 
 export default function App() {
-  function getClasses(id: number, count: number) {
-    var child = [];
-
-    const today: Date = new Date();
-
-    for (let j = 0; j < count; j++) {
-      const dd: Date = new Date(ClassData[id - 1].content[j].dueDate);
-      const diffTime: number = dd.getTime() - today.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      child.push([ClassData[id - 1].content[j].assignmentName, diffDays]);
-    }
-
-    for (let i = 0; i < child.length - 1; i++) {
-      if (child[i][1] > child[i + 1][1]) {
-        const placeholder: Array<any> = child[i];
-        child[i] = child[i + 1];
-        child[i + 1] = placeholder;
-      }
-    }
-
+  function renderClasses(id: number, count: number) {
     return (
       <FlatList
-        data={child}
+        data={getClasses(id, count)}
         renderItem={({ item }) => (
           <ClassDisplay name={item[0]} date={item[1]} />
         )}
@@ -107,32 +92,12 @@ export default function App() {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
-  const [items, setItems] = useState(getItems());
-  function getItems() {
-    const classNames = [];
-    for (let i = 0; i < ClassData.length; i++) {
-      classNames.push({
-        label: ClassData[i].title,
-        value: ClassData[i].classID - 1,
-      });
-    }
-    return classNames;
-  }
+  const [items, setItems] = useState(getClassesForDropdown());
 
   const [date, setDate] = useState(new Date());
 
   const [themeValue, setTheme] = useState(0);
-  const [themeItems, setThemeItems] = useState(getThemes());
-  function getThemes() {
-    var list = [];
-    for (let i = 0; i < themes.length; i++) {
-      list.push({
-        label: themes[i].name,
-        value: i,
-      });
-    }
-    return list;
-  }
+  const [themeItems, setThemeItems] = useState(getThemesForDropdown());
 
   const [uniqueValue, changeUniqueValue] = useState(currentTheme.id);
   function forceRemount() {
@@ -141,18 +106,20 @@ export default function App() {
 
   return (
     //SAFEAREAVIEW is for IOS top bezel
-    <SafeAreaView>
+    <SafeAreaView style={styles.iosSafeArea}>
       <View>
         <View style={styles.topTextContainer}>
-          <Pressable
-            onPress={() => {
-              setSettingsModalVisibility(true);
-            }}
-          >
-            <Icon name="menu" style={styles.settingsIcon} />
-          </Pressable>
           <DateDisplay />
         </View>
+
+        <Pressable
+          onPress={() => {
+            setSettingsModalVisibility(true);
+          }}
+          style={styles.menuButton}
+        >
+          <Icon name="menu" style={styles.settingsIcon} />
+        </Pressable>
 
         <View style={styles.activityContainer}>
           <FlatList
@@ -161,7 +128,7 @@ export default function App() {
             renderItem={({ item }) => (
               <Accordion
                 title={item.title}
-                content={getClasses(item.classID, item.taskCount)}
+                content={renderClasses(item.classID, item.taskCount)}
               />
             )}
             style={styles.activityList}
@@ -187,6 +154,7 @@ export default function App() {
             <Pressable
               onPress={() => {
                 setTaskModalVisibility(true);
+                setItems(getClassesForDropdown());
               }}
               style={styles.minorButton}
             >
@@ -207,6 +175,7 @@ export default function App() {
         </View>
       </View>
 
+      {/* SETTINGS-MODAL */}
       <Modal
         animationType="slide"
         transparent={false}
@@ -218,6 +187,13 @@ export default function App() {
       >
         <View style={settingsStyles.settingsContainer}>
           <View style={settingsStyles.settingsTitleContainer}>
+            <Pressable
+              onPress={() => {
+                setSettingsModalVisibility(false);
+              }}
+            >
+              <Text style={settingsStyles.backButton}>Back</Text>
+            </Pressable>
             <Text style={settingsStyles.settingsTitle}>Menu</Text>
           </View>
           <View style={settingsStyles.settingsOptionsContainer}>
@@ -265,6 +241,7 @@ export default function App() {
         </View>
       </Modal>
 
+      {/* ACTIVITY-MODAL */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -314,6 +291,7 @@ export default function App() {
         </View>
       </Modal>
 
+      {/* TASK-MODAL */}
       <Modal
         animationType="slide"
         transparent={true}

@@ -86,7 +86,7 @@ const styles = EStyleSheet.create({
     width: "100%",
   },
   icon: {
-    color: "white",
+    color: "$icon",
 
     fontSize: 20,
     fontWeight: "bold",
