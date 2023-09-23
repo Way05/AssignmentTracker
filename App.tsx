@@ -24,7 +24,7 @@ import {
 } from "./src/app-data/classesOBJ";
 import toggleAnimation from "./src/animations/toggleAnimation.js";
 import DropDownPicker from "react-native-dropdown-picker";
-// import DatePicker from "react-native-date-picker";
+import DatePicker from "react-native-date-picker";
 import {
   styles,
   changeTheme,
@@ -324,11 +324,11 @@ export default function App() {
 
             {/* https://reactnative.dev/docs/datepickerios */}
             {/* MUST RUN DATEPICKER ON DEV BUILD */}
-            {/* <DatePicker
+            <DatePicker
               date={date}
               onDateChange={setDate}
               style={styles.datePicker}
-            /> */}
+            />
 
             <View style={styles.pressables}>
               <Pressable
